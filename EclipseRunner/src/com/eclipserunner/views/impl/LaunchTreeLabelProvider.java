@@ -59,7 +59,7 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 		else if (element instanceof ILaunchTypeNode) {
 			return getLaunchConfigurationTypeImage((ILaunchTypeNode) element);
 		}
-		return ImageDescriptor.getMissingImageDescriptor().createImage();
+		return RunnerPlugin.getDefault().getImage(ImageDescriptor.getMissingImageDescriptor());
 	}
 
 	private Image getCategoryImage(ICategoryNode launchConfigurationCategory) {
@@ -82,13 +82,13 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 		return debugModelPresentation.getImage(typeNode.getLaunchConfigurationType());
 	}
 	
-	private Image createImage(String image) {
-		return RunnerPlugin.getDefault().getImageDescriptor(image).createImage();
+	private Image createImage(String imageName) {
+		return RunnerPlugin.getDefault().getImage(imageName);
 	}
 
 	private Image overlyBookmarkIcon(Image image, String decoration) {
 		ImageDescriptor decorationDescriptor = RunnerPlugin.getDefault().getImageDescriptor(decoration);
-		return new DecorationOverlayIcon(image, decorationDescriptor, IDecoration.TOP_RIGHT).createImage();
+		return RunnerPlugin.getDefault().getImage(new DecorationOverlayIcon(image, decorationDescriptor, IDecoration.TOP_RIGHT));
 	}
 
 }

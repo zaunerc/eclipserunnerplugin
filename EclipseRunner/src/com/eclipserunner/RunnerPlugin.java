@@ -12,6 +12,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -142,6 +144,26 @@ public class RunnerPlugin extends AbstractUIPlugin {
 		else {
 			RunnerStateExternalizer.readDefaultRunnerModel();
 		}
+	}
+	
+	public Image getImage(ImageDescriptor imageDescriptor) {
+		ImageRegistry imageRegistry = getImageRegistry();
+		String imageName = imageDescriptor.toString();
+		Image image = imageRegistry.get(imageName);
+		if (image == null) {
+			image = imageDescriptor.createImage();
+			imageRegistry.put(imageName, image);
+		}
+		return image;
+	}
+	public Image getImage(String imageName) {
+		ImageRegistry imageRegistry = getImageRegistry();
+		Image image = imageRegistry.get(imageName);
+		if (image == null) {
+			image = getImageDescriptor(imageName).createImage();
+			imageRegistry.put(imageName, image);
+		}
+		return image;
 	}
 
 }
