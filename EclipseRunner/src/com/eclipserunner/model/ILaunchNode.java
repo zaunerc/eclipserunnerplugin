@@ -1,5 +1,7 @@
 package com.eclipserunner.model;
 
+import java.util.Set;
+
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 /**
@@ -18,6 +20,6 @@ public interface ILaunchNode extends IBookmarkable, IDroppable {
 
 	void setLaunchMode(String mode);
 	String getLaunchMode();
-	
+	boolean supportsMode(String mode);
 	void launch(String mode);
 }

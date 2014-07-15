@@ -17,7 +17,9 @@ public class LaunchOtherConfigurationAction extends BaseRunnerAction {
 		this.selection = selection;
 		this.mode = mode;
 	}
-
+	public String getMode() {
+		return mode;
+	}
 	@Override
 	public void run() {
 		if (selection.hasExactlyOneNode() && selection.firstNodeHasType(ILaunchNode.class)) {

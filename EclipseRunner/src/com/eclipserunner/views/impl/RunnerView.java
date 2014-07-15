@@ -3,10 +3,12 @@ package com.eclipserunner.views.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
@@ -58,6 +60,7 @@ import com.eclipserunner.ui.dnd.RunnerViewDropListener;
 import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
+import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
 
 /**
  * Class provides plugin eclipse View UI component.
@@ -85,7 +88,7 @@ public class RunnerView extends ViewPart
 	private Action launchRunConfigurationAction;
 	private Action launchDefuaultConfigurationAction;
 	private Action launchDebugConfigurationAction;
-	private List<Action> launchOtherConfigurationActions = new ArrayList<Action>();
+	private List<LaunchOtherConfigurationAction> launchOtherConfigurationActions = new ArrayList<LaunchOtherConfigurationAction>();
 	private Action openItemAction;
 
 	private Action addNewCategoryAction;
@@ -263,7 +266,7 @@ public class RunnerView extends ViewPart
 					}
 				}
 
-				launchOtherConfigurationActions.add(builder.createLaunchOtherConfigurationAction(mode,
+				launchOtherConfigurationActions.add((LaunchOtherConfigurationAction)builder.createLaunchOtherConfigurationAction(mode,
 						launchModes[i].getAttribute("label"), launchModes[i].getAttribute("label"), image));
 
 				if( launchGroupExtension != null ) {
@@ -352,10 +355,17 @@ public class RunnerView extends ViewPart
 
 	private void setupMenuItems(IMenuManager manager) {
 		if (selection.firstNodeHasType(ILaunchNode.class)) {
-			manager.add(launchRunConfigurationAction);
-			manager.add(launchDebugConfigurationAction);
-			for(Action otherLaunchAction : launchOtherConfigurationActions) {
-				manager.add(otherLaunchAction);
+			ILaunchNode launchNode = selection.getFirstNodeAs(ILaunchNode.class);
+			if(launchNode.supportsMode(ILaunchManager.RUN_MODE)) {
+				manager.add(launchRunConfigurationAction);
+			}
+			if(launchNode.supportsMode(ILaunchManager.DEBUG_MODE)) {
+				manager.add(launchDebugConfigurationAction);
+			}
+			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
+				if(launchNode.supportsMode(otherLaunchAction.getMode())) {
+					manager.add(otherLaunchAction);
+				}
 			}
 			manager.add(openItemAction);
 			manager.add(new Separator());

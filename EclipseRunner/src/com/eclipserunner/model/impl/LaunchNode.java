@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.DebugUITools;
 
@@ -114,6 +115,14 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 	public void launch(String mode) {
 		setLaunchMode(mode);
 		DebugUITools.launch(getLaunchConfiguration(),mode);
+	}
+
+	public boolean supportsMode(String mode) {
+		try {
+			return getLaunchConfiguration().supportsMode(mode);
+		} catch (CoreException e) {
+			return true;
+		}
 	}
 
 }
