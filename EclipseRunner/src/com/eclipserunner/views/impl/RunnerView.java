@@ -83,6 +83,7 @@ public class RunnerView extends ViewPart
 	private List<Action> showLaunchOtherConfigurationActions = new ArrayList<Action>();
 
 	private Action launchRunConfigurationAction;
+	private Action launchDefuaultConfigurationAction;
 	private Action launchDebugConfigurationAction;
 	private List<Action> launchOtherConfigurationActions = new ArrayList<Action>();
 	private Action openItemAction;
@@ -240,6 +241,7 @@ public class RunnerView extends ViewPart
 		showRunConfigurationsDialogAction   = builder.createShowRunConfigurationDialogAction();
 		showDebugConfigurationsDialogAction = builder.createShowDebugConfigurationDialogAction();
 		launchRunConfigurationAction        = builder.createRunConfigurationAction();
+		launchDefuaultConfigurationAction   = builder.createDefaultConfigurationAction();
 		launchDebugConfigurationAction      = builder.createDebugConfigurationAction();
 
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
@@ -403,11 +405,7 @@ public class RunnerView extends ViewPart
 	}
 
 	public void doubleClick(DoubleClickEvent event) {
-		if (shouldRunInDebugMode()) {
-			launchDebugConfigurationAction.run();
-		} else {
-			launchRunConfigurationAction.run();
-		}
+		launchDefuaultConfigurationAction.run();
 	}
 
 	public boolean shouldRunInDebugMode() {

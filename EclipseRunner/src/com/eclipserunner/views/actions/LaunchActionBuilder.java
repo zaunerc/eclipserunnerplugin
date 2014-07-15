@@ -123,6 +123,14 @@ public final class LaunchActionBuilder {
 			.andReleaseAction();
 	}
 
+	public Action createDefaultConfigurationAction() {
+		return decorate(new DefaultLaunchConfigurationAction(nodeSelection, ID_RUN_LAUNCH_GROUP))
+			.withTitle(Message_runConfiguration)
+			.withTooltip(Message_runConfigurationTooltip)
+			.withImage(Image.RUN)
+			.andReleaseAction();
+	}
+
 	public Action createDebugConfigurationAction() {
 		return decorate(new LaunchConfigurationAction(nodeSelection, ID_DEBUG_LAUNCH_GROUP))
 			.withTitle(Message_debugConfiguration)

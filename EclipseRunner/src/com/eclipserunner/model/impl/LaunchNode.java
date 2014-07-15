@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.ui.DebugUITools;
 
 import com.eclipserunner.model.IActionEnablement;
 import com.eclipserunner.model.ICategoryNode;
@@ -25,6 +26,7 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 	private boolean bookmarked;
 
 	private Set<ILaunchNodeChangeListener> launchNodeChangeListeners = new HashSet<ILaunchNodeChangeListener>();
+	private String mode;
 
 	public LaunchNode() {
 	}
@@ -98,6 +100,20 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 
 	public boolean drop(List<ILaunchNode> launchNodesToMove) {
 		return categoryNode.drop(launchNodesToMove);
+	}
+
+	public void setLaunchMode(String mode) {
+		this.mode=mode;
+		fireLaunchNodeChangedEvent();
+	}
+
+	public String getLaunchMode() {
+		return mode;
+	}
+
+	public void launch(String mode) {
+		setLaunchMode(mode);
+		DebugUITools.launch(getLaunchConfiguration(),mode);
 	}
 
 }

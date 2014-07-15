@@ -59,6 +59,7 @@ public class RunnerStateExternalizer {
 
 	private static final String NAME_ATTR           = "name";
 	private static final String BOOKMARK_ATTR       = "bookmark";
+	private static final String DEFAULT_LAUNCH_MODE_ATTR       = "defaultLaunchMode";
 
 	private static final String ROOT_NODE_NAME      = "runner";
 	private static final String CATEGORY_NODE_NAME  = "category";
@@ -126,10 +127,10 @@ public class RunnerStateExternalizer {
 
 				if (launchConfiguration != null) {
 					boolean isBookmarked = Boolean.valueOf(launchElement.getAttribute(BOOKMARK_ATTR));
-
-					categoryNode.add(
-						createLaunchCategory(launchConfiguration, isBookmarked)
-					);
+					
+					ILaunchNode launchNode = createLaunchCategory(launchConfiguration, isBookmarked);
+					launchNode.setLaunchMode(launchElement.getAttribute(DEFAULT_LAUNCH_MODE_ATTR));
+					categoryNode.add(launchNode);
 				}
 			}
 		}
@@ -243,6 +244,7 @@ public class RunnerStateExternalizer {
 		ILaunchConfiguration launchConfiguration = launchNode.getLaunchConfiguration();
 		launchElement.setAttribute(NAME_ATTR, launchConfiguration.getName());
 		launchElement.setAttribute(BOOKMARK_ATTR, Boolean.toString(launchNode.isBookmarked()));
+		launchElement.setAttribute(DEFAULT_LAUNCH_MODE_ATTR, launchNode.getLaunchMode());
 		return launchElement;
 	}
 
