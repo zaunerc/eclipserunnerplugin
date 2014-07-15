@@ -2,14 +2,14 @@
 <feature
       id="EclipseRunnerFeature"
       label="EclipseRunnerFeature"
-      version="1.3.0.1"
+      version="1.3.1.qualifier"
       provider-name="EclipseRunner">
 
    <plugin
          id="EclipseRunner"
          download-size="0"
          install-size="0"
-         version="1.3.0.1"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
