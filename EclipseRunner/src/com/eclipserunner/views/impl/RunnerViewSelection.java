@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -97,7 +96,7 @@ public class RunnerViewSelection implements INodeSelection {
 						return true;
 					}
 				}
-			} catch (CoreException e) {
+			} catch (Exception e) {
 				return false;
 			}
 		}
