@@ -20,6 +20,14 @@ import com.eclipserunner.RunnerPlugin;
 @SuppressWarnings("restriction")
 public class BaseRunnerAction extends Action {
 
+	public BaseRunnerAction() {
+		super();
+	}
+
+	public BaseRunnerAction(String text, int style) {
+		super(text, style);
+	}
+
 	protected IPreferenceStore getPreferenceStore() {
 		return RunnerPlugin.getDefault().getPreferenceStore();
 	}

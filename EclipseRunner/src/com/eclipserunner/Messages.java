@@ -70,8 +70,8 @@ public class Messages extends NLS {
 	public static String Message_treeModeWithTypes;
 	public static String Message_treeModeWithTypesTooltip;
 
-	public static String Message_createToggleDefaultRunMode;
-	public static String Message_createToggleDefaultRunModeTooltip;
+	public static String Message_createRunDefaultAction;
+	public static String Message_createRunDefaultActionTooltip;
 
 	public static String Message_createToggleDefaultCategory;
 	public static String Message_createToggleDefaultCategoryTooltip;

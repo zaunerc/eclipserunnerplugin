@@ -30,7 +30,9 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
@@ -46,7 +48,6 @@ import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.ViewPart;
 
 import com.eclipserunner.Messages;
-import com.eclipserunner.PreferenceConstants;
 import com.eclipserunner.RunnerPlugin;
 import com.eclipserunner.model.ICategoryNode;
 import com.eclipserunner.model.IFilteredRunnerModel;
@@ -62,6 +63,7 @@ import com.eclipserunner.views.TreeMode;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
 import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
 import com.eclipserunner.views.actions.ShowLaunchOtherConfigurationsDialogAction;
+import com.eclipserunner.views.actions.RunDefaultAction;
 
 /**
  * Class provides plugin eclipse View UI component.
@@ -102,7 +104,7 @@ public class RunnerView extends ViewPart
 	private Action toggleFlatModeAction;
 	private Action toggleTypeModeAction;
 	private Action toggleDefaultCategoryAction;
-	private Action toggleDefaultRunModeAction;
+	private RunDefaultAction RunDefaultActionAction;
 	private Action toggleBookmarkModeAction;
 
 	private Action toggleClosedProjectFilterAction;
@@ -135,8 +137,9 @@ public class RunnerView extends ViewPart
 		setupLaunchActions();
 		setupContextMenu();
 		setupActionBars();
-
+		setupRunMenu();
 	}
+
 
 	private void initializeModel() {
 		runnerModel = RunnerModelProvider.getInstance().getFilteredModel();
@@ -296,7 +299,7 @@ public class RunnerView extends ViewPart
 		toggleFlatModeAction                = builder.createToggleFlatModeAction();
 		toggleTypeModeAction                = builder.createToggleTypeModeAction();
 		toggleDefaultCategoryAction         = builder.createToggleDefaultCategoryAction();
-		toggleDefaultRunModeAction			= builder.createToggleRunModeAction();
+		RunDefaultActionAction			= builder.createRunDefaultAction();
 		toggleBookmarkModeAction            = builder.createToggleBookmarkModeAction();
 		toggleClosedProjectFilterAction     = builder.createToggleClosedProjectFilterAction();
 		toggleDelectedProjectFilterAction   = builder.createDelectedProjectFilterAction();
@@ -346,7 +349,7 @@ public class RunnerView extends ViewPart
 	private void setupLocalToolBar(IToolBarManager manager) {
 		manager.add(toggleBookmarkModeAction);
 		manager.add(toggleDefaultCategoryAction);
-		manager.add(toggleDefaultRunModeAction);
+		manager.add(RunDefaultActionAction);
 		manager.add(new Separator());
 		manager.add(addNewCategoryAction);
 		manager.add(new Separator());
@@ -359,18 +362,9 @@ public class RunnerView extends ViewPart
 		setupActionEnablement();
 	}
 	private void setupMenuItems(IMenuManager manager) {
-		ILaunchNode launchNode = null;
-		if(selection.firstNodeHasType(ILaunchNode.class)) {
-			launchNode=selection.getFirstNodeAs(ILaunchNode.class);
-		}
-		if (launchNode != null) {
-			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
-				String mode = otherLaunchAction.getMode();
-				if(launchNode.supportsMode(mode)) {
-					manager.add(otherLaunchAction);
-					otherLaunchAction.setChecked(mode.equals(launchNode.getDefaultMode()));
-				}
-			}
+		ILaunchNode launchNode = getLaunchNode();
+		if( launchNode != null) {
+			setupRunMenu(manager, launchNode);
 	        manager.add(new Separator());
 			manager.add(openItemAction);
 			manager.add(new Separator());
@@ -390,6 +384,35 @@ public class RunnerView extends ViewPart
 				String mode = showLaunchOtherConfigurationAction.getMode();
 				if(launchNode.supportsMode(mode)) {
 					manager.add(showLaunchOtherConfigurationAction);
+				}
+			}
+		}
+	}
+
+	private void setupRunMenu() {
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				updateRunMenu();
+			}
+		});
+		updateRunMenu();
+		
+	}
+	private ILaunchNode getLaunchNode() {
+		ILaunchNode launchNode = null;
+		if(selection.firstNodeHasType(ILaunchNode.class)) {
+			launchNode=selection.getFirstNodeAs(ILaunchNode.class);
+		}
+		return launchNode;
+	}
+
+	private void setupRunMenu(IMenuManager manager, ILaunchNode launchNode) {
+		if (launchNode != null) {
+			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
+				String mode = otherLaunchAction.getMode();
+				if(launchNode.supportsMode(mode)) {
+					manager.add(otherLaunchAction);
+					otherLaunchAction.setChecked(mode.equals(launchNode.getDefaultMode()));
 				}
 			}
 		}
@@ -424,12 +447,9 @@ public class RunnerView extends ViewPart
 		launchDefaultConfigurationAction.run();
 	}
 
-	public boolean shouldRunInDebugMode() {
-		return RunnerPlugin.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.RUN_MODE);
-	}
-
 	public void modelChanged() {
 		refresh();
+		updateRunMenu();
 	}
 
 	@Override
@@ -485,6 +505,14 @@ public class RunnerView extends ViewPart
 
 	void setTreeViewerForTesting(TreeViewer viewer) {
 		this.viewer = viewer;
+	}
+
+
+	private void updateRunMenu() {
+		IMenuManager menuManager = RunDefaultActionAction.getMenuManager();
+		menuManager.removeAll();
+		setupRunMenu(menuManager,getLaunchNode());
+		RunDefaultActionAction.update();
 	}
 
 }

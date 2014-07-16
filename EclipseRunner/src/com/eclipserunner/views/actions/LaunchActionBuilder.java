@@ -8,8 +8,8 @@ import static com.eclipserunner.Messages.Message_collapseAll;
 import static com.eclipserunner.Messages.Message_collapseAllTooltip;
 import static com.eclipserunner.Messages.Message_createToggleDefaultCategory;
 import static com.eclipserunner.Messages.Message_createToggleDefaultCategoryTooltip;
-import static com.eclipserunner.Messages.Message_createToggleDefaultRunMode;
-import static com.eclipserunner.Messages.Message_createToggleDefaultRunModeTooltip;
+import static com.eclipserunner.Messages.Message_createRunDefaultAction;
+import static com.eclipserunner.Messages.Message_createRunDefaultActionTooltip;
 import static com.eclipserunner.Messages.Message_expandAll;
 import static com.eclipserunner.Messages.Message_expandAllTooltip;
 import static com.eclipserunner.Messages.Message_openItem;
@@ -187,11 +187,11 @@ public final class LaunchActionBuilder {
 			.andReleaseAction();
 	}
 
-	public Action createToggleRunModeAction() {
-		return decorate(new ToggleRunModeAction(PreferenceConstants.RUN_MODE))
-			.withTitle(Message_createToggleDefaultRunMode)
-			.withTooltip(Message_createToggleDefaultRunModeTooltip)
-			.withImage(Image.DEBUG)
+	public RunDefaultAction createRunDefaultAction() {
+		return (RunDefaultAction) decorate(new RunDefaultAction())
+			.withTitle(Message_createRunDefaultAction)
+			.withTooltip(Message_createRunDefaultActionTooltip)
+			.withImage(Image.RUN)
 			.andReleaseAction();
 	}
 
