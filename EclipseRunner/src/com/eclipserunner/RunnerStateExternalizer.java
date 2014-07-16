@@ -60,6 +60,7 @@ public class RunnerStateExternalizer {
 	private static final String NAME_ATTR           = "name";
 	private static final String BOOKMARK_ATTR       = "bookmark";
 	private static final String DEFAULT_LAUNCH_MODE_ATTR       = "defaultLaunchMode";
+	private static final String NODE_EXPANDED_ATTR  = "expanded";
 
 	private static final String ROOT_NODE_NAME      = "runner";
 	private static final String CATEGORY_NODE_NAME  = "category";
@@ -117,6 +118,7 @@ public class RunnerStateExternalizer {
 			}
 			else {
 				categoryNode = new CategoryNode(categoryNodeName);
+				categoryNode.setExpanded(Boolean.valueOf(categoryElement.getAttribute(NODE_EXPANDED_ATTR)));
 				runnerModel.addCategoryNode(categoryNode);
 			}
 
@@ -231,6 +233,7 @@ public class RunnerStateExternalizer {
 	private static Element createCategoryElement(ICategoryNode category, Document document) {
 		Element categoryElement = document.createElement(CATEGORY_NODE_NAME);
 		categoryElement.setAttribute(NAME_ATTR, category.getName());
+		categoryElement.setAttribute(NODE_EXPANDED_ATTR, Boolean.toString(category.isExpanded()));
 		for (ILaunchNode launchNode : category.getLaunchNodes()) {
 			categoryElement.appendChild(
 				createLaunchElement(launchNode, document)

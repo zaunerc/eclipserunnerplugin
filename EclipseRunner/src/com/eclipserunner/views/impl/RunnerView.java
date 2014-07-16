@@ -32,7 +32,9 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.ITreeViewerListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreeExpansionEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
@@ -154,13 +156,26 @@ public class RunnerView extends ViewPart
 
 		viewer = tree.getViewer();
 		setupTreeContentProvider();
-
 		viewer.setLabelProvider(new LaunchTreeLabelProvider(runnerModel));
 		viewer.addDoubleClickListener(this);
 		viewer.setInput(getViewSite());
-
+		viewer.addTreeListener(new ITreeViewerListener() {
+			public void treeExpanded(TreeExpansionEvent event) {
+				Object element = event.getElement();
+				if(element instanceof ICategoryNode) {
+					((ICategoryNode) element).setExpanded(true);
+				}
+			}
+			public void treeCollapsed(TreeExpansionEvent event) {
+				Object element = event.getElement();
+				if(element instanceof ICategoryNode) {
+					((ICategoryNode) element).setExpanded(false);
+				}
+			}
+		});
 		// we're cooperative and also provide our selection
 		getSite().setSelectionProvider(viewer);
+		updateExpansion();
 	}
 
 	private void initializeSelectionListeners() {
@@ -499,6 +514,7 @@ public class RunnerView extends ViewPart
 		RunnerPlugin.getDisplay().syncExec(new Runnable() {
 			public void run() {
 				getViewer().refresh();
+				updateExpansion();
 			}
 		});
 	}
@@ -513,6 +529,18 @@ public class RunnerView extends ViewPart
 		menuManager.removeAll();
 		setupRunMenu(menuManager,getLaunchNode());
 		RunDefaultActionAction.update();
+	}
+
+
+	private void updateExpansion() {
+		Collection<ICategoryNode> newexpanded = new ArrayList<ICategoryNode>();
+		Collection<ICategoryNode> nodes = RunnerModelProvider.getInstance().getDefaultModel().getCategoryNodes();
+		for (ICategoryNode categroy : nodes) {
+			if(categroy.isExpanded()) {
+				newexpanded.add(categroy);
+			}
+		}
+		getViewer().setExpandedElements(newexpanded.toArray());
 	}
 
 }

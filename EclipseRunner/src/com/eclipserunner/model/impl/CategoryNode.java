@@ -35,6 +35,7 @@ public class CategoryNode implements ICategoryNode, ILaunchNodeChangeListener, I
 
 	private boolean removable  = true;
 	private boolean renameable = true;
+	private boolean expanded = true;
 
 	public CategoryNode(String name) {
 		this.name = name;
@@ -144,6 +145,14 @@ public class CategoryNode implements ICategoryNode, ILaunchNodeChangeListener, I
 			this.add(launchNode);
 		}
 		return true;
+	}
+
+	public boolean isExpanded() {
+		return expanded;
+	}
+
+	public void setExpanded(boolean expanded) {
+		this.expanded = expanded;		
 	}
 
 }

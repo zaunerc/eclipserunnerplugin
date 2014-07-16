@@ -13,7 +13,7 @@ import com.eclipserunner.model.ILaunchNode;
 public class CategoryDelegatingDecorator implements ICategoryNode {
 
 	protected final ICategoryNode category;
-
+	
 	public CategoryDelegatingDecorator(ICategoryNode category) {
 		this.category = category;
 	}
@@ -78,6 +78,14 @@ public class CategoryDelegatingDecorator implements ICategoryNode {
 
 	public boolean drop(List<ILaunchNode> launchNodesToMove) {
 		return category.drop(launchNodesToMove);
+	}
+
+	public boolean isExpanded() {
+		return category.isExpanded();
+	}
+
+	public void setExpanded(boolean expanded) {
+		category.setExpanded(expanded);
 	}
 
 }

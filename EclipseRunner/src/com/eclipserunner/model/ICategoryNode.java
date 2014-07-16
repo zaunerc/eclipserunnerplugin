@@ -11,7 +11,10 @@ public interface ICategoryNode extends IActionEnablement, IBookmarkable, IDroppa
 
 	String getName();
 	void setName(String name);
-
+	
+	boolean isExpanded();
+	void setExpanded(boolean expanded);
+	
 	Collection<ILaunchNode> getLaunchNodes();
 
 	void add(ILaunchNode launchNode);
