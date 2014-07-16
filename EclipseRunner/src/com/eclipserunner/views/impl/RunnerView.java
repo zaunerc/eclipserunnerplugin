@@ -352,7 +352,7 @@ public class RunnerView extends ViewPart
 	private void addIfMode(IMenuManager manager, Action action, ILaunchNode launchNode, String mode) {
 		if(launchNode.supportsMode(mode)) {
 			manager.add(action);
-			action.setChecked(mode.equals(launchNode.getLaunchMode()));
+			action.setChecked(mode.equals(launchNode.getDefaultMode()));
 		}
 		
 	}

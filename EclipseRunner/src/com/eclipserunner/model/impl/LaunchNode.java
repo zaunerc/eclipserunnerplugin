@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.DebugUITools;
 
 import com.eclipserunner.model.IActionEnablement;
@@ -103,17 +104,20 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 		return categoryNode.drop(launchNodesToMove);
 	}
 
-	public void setLaunchMode(String mode) {
+	public void setDefaultMode(String mode) {
 		this.mode=mode;
 		fireLaunchNodeChangedEvent();
 	}
 
-	public String getLaunchMode() {
+	public String getDefaultMode() {
+		if(mode == null || mode.length()==0) {
+			return ILaunchManager.RUN_MODE;
+		}
 		return mode;
 	}
 
 	public void launch(String mode) {
-		setLaunchMode(mode);
+		setDefaultMode(mode);
 		DebugUITools.launch(getLaunchConfiguration(),mode);
 	}
 

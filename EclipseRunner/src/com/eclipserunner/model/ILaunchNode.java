@@ -16,8 +16,12 @@ public interface ILaunchNode extends IBookmarkable, IDroppable {
 	void addLaunchNodeChangeListener(ILaunchNodeChangeListener launchNodeChangeListener);
 	void removeLaunchNodeChangeListener(ILaunchNodeChangeListener launchNodeChangeListener);
 
-	void setLaunchMode(String mode);
-	String getLaunchMode();
+	/**
+	 * @param mode the default launch mode
+	 */
+	void setDefaultMode(String mode);
+	String getDefaultMode();
 	boolean supportsMode(String mode);
+	
 	void launch(String mode);
 }

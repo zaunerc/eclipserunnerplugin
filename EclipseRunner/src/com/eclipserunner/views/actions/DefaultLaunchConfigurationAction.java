@@ -19,8 +19,8 @@ public class DefaultLaunchConfigurationAction extends LaunchConfigurationAction 
 			ILaunchNode launcNode = selection.getFirstNodeAs(ILaunchNode.class);
 			if (launcNode!=null) {
 				String mode = null;
-				if(launcNode.getLaunchMode()!=null) {
-					mode = launcNode.getLaunchMode();
+				if(launcNode.getDefaultMode()!=null) {
+					mode = launcNode.getDefaultMode();
 				}
 				// if there is no previous launch mode, use  the default
 				if(mode == null || mode.length() == 0){
