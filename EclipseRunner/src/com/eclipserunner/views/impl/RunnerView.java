@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.ViewPart;
@@ -110,12 +111,6 @@ public class RunnerView extends ViewPart
 	private Action toggleActiveWorkingSetFilterAction;
 	private Action toggleActiveProjektFilterAction;
 
-	// we are listening only from this selection providers
-	private final String[] selectonProviders = new String[] {
-		"org.eclipse.jdt.ui.PackageExplorer",
-		"org.eclipse.ui.navigator.ProjectExplorer"
-	};
-
 	private LaunchActionBuilder builder;
 	private RunnerViewSelection selection;
 
@@ -176,9 +171,7 @@ public class RunnerView extends ViewPart
 
 	private void initializeSelectionListeners() {
 		selectionListener = new RunnerModelJdtSelectionListenerAdapter(runnerModel, this);
-		for (String partId : selectonProviders) {
-			getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(partId, selectionListener);
-		}
+		getSite().getWorkbenchWindow().getSelectionService().addPostSelectionListener(selectionListener);
 	}
 
 	private void initializeLaunchConfigurationListeners() {
@@ -233,9 +226,7 @@ public class RunnerView extends ViewPart
 	}
 
 	private void disposeSelectionListeners() {
-		for (String partId : selectonProviders) {
-			getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(partId, selectionListener);
-		}
+		getSite().getWorkbenchWindow().getSelectionService().removePostSelectionListener(selectionListener);
 	}
 
 	private void disposeLaunchConfigurationListeners() {

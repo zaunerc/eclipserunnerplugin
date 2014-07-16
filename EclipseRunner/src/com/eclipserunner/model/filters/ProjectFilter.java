@@ -64,7 +64,7 @@ public class ProjectFilter extends AbstractFilter {
 		return null;
 	}
 	
-	private String getFilterProjectName() {
+	public String getFilterProjectName() {
 		return projectName;
 	}
 
