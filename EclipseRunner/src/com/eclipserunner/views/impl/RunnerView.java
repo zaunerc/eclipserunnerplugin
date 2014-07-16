@@ -43,7 +43,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.ViewPart;
@@ -55,8 +54,8 @@ import com.eclipserunner.model.IFilteredRunnerModel;
 import com.eclipserunner.model.ILaunchNode;
 import com.eclipserunner.model.IModelChangeListener;
 import com.eclipserunner.model.RunnerModelProvider;
-import com.eclipserunner.model.adapters.RunnerModelJdtSelectionListenerAdapter;
 import com.eclipserunner.model.adapters.RunnerModelLaunchConfigurationListenerAdapter;
+import com.eclipserunner.model.adapters.RunnerProjectSelectionListenerAdapter;
 import com.eclipserunner.ui.dnd.RunnerViewDragListener;
 import com.eclipserunner.ui.dnd.RunnerViewDropListener;
 import com.eclipserunner.views.IRunnerView;
@@ -170,7 +169,7 @@ public class RunnerView extends ViewPart
 	}
 
 	private void initializeSelectionListeners() {
-		selectionListener = new RunnerModelJdtSelectionListenerAdapter(runnerModel, this);
+		selectionListener = new RunnerProjectSelectionListenerAdapter(runnerModel, this);
 		getSite().getWorkbenchWindow().getSelectionService().addPostSelectionListener(selectionListener);
 	}
 

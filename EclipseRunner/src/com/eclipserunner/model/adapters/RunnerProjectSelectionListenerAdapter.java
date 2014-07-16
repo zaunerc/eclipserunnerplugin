@@ -6,7 +6,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.internal.WorkingSet;
 
 import com.eclipserunner.model.IFilteredRunnerModel;
 import com.eclipserunner.model.INodeFilter;
@@ -14,17 +13,16 @@ import com.eclipserunner.model.filters.ProjectFilter;
 import com.eclipserunner.views.impl.RunnerView;
 
 /**
- * Adapter listening for JDT selection events.
+ * Adapter listening the currently selected project.
  * 
- * @author bary
+ * @author bary, scharf
  */
-@SuppressWarnings("restriction")
-public class RunnerModelJdtSelectionListenerAdapter implements ISelectionListener {
+public class RunnerProjectSelectionListenerAdapter implements ISelectionListener {
 
 	private RunnerView view;
 	private ProjectFilter projectFilter;
 
-	public RunnerModelJdtSelectionListenerAdapter(IFilteredRunnerModel model, RunnerView view) {
+	public RunnerProjectSelectionListenerAdapter(IFilteredRunnerModel model, RunnerView view) {
 		this.view = view;
 		// Find ProjectFilter filter ;)
 		for (INodeFilter filter : model.getFilters()) {
@@ -38,15 +36,10 @@ public class RunnerModelJdtSelectionListenerAdapter implements ISelectionListene
 		return o1 == null ? o2 == null : o1.equals(o2);
 	}
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		Object selectedElement = getSelectedElement(selection);
 		String projectName = projectFilter.getFilterProjectName();
-		if (selectedElement instanceof WorkingSet) {
-			projectFilter.setProjectName(null);   // clear project filter
-		} else {
-			IResource resource = extractResource(selection);
-			if(resource!=null && resource.getProject()!=null) {
-				projectFilter.setProjectName(resource.getProject().getName());
-			}
+		IResource resource = extractResource(selection);
+		if(resource!=null && resource.getProject()!=null) {
+			projectFilter.setProjectName(resource.getProject().getName());
 		}
 		if(!equalsNull(projectName, projectFilter.getFilterProjectName())) {
 			// Refresh View 
@@ -67,13 +60,5 @@ public class RunnerModelJdtSelectionListenerAdapter implements ISelectionListene
 		Object adapter = adaptable.getAdapter(IResource.class);
 		return (IResource) adapter;
 
-	}
-	private Object getSelectedElement(ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			return structuredSelection.getFirstElement();
-		}
-		return null;
-	}
-	
+	}	
 }
