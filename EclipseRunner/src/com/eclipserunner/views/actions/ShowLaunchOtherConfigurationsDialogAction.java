@@ -51,5 +51,8 @@ public class ShowLaunchOtherConfigurationsDialogAction extends BaseRunnerAction 
 	public static IStructuredSelection asStructuredSelection(Object object) {
 		return new StructuredSelection(object);
 	}
+	public String getMode() {
+		return launchGroupExtension.getMode();
+	}
 
 }

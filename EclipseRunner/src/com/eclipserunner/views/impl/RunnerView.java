@@ -61,6 +61,7 @@ import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
 import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
+import com.eclipserunner.views.actions.ShowLaunchOtherConfigurationsDialogAction;
 
 /**
  * Class provides plugin eclipse View UI component.
@@ -81,7 +82,7 @@ public class RunnerView extends ViewPart
 
 	private IPropertyChangeListener propertyChangeListener;
 
-	private List<Action> showLaunchOtherConfigurationActions = new ArrayList<Action>();
+	private List<ShowLaunchOtherConfigurationsDialogAction> showLaunchOtherConfigurationActions = new ArrayList<ShowLaunchOtherConfigurationsDialogAction>();
 
 	private Action launchDefaultConfigurationAction;
 	private List<LaunchOtherConfigurationAction> launchOtherConfigurationActions = new ArrayList<LaunchOtherConfigurationAction>();
@@ -279,7 +280,7 @@ public class RunnerView extends ViewPart
 
 			if( launchGroupExtension != null ) {
 				String label = String.format("Open %1$s configurations ...", launchGroupExtension.getMode());
-				showLaunchOtherConfigurationActions.add(builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
+				showLaunchOtherConfigurationActions.add((ShowLaunchOtherConfigurationsDialogAction) builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
 						label, label, image));
 			}
 		}
@@ -385,8 +386,11 @@ public class RunnerView extends ViewPart
 			manager.add(bookmarkAction);
 			manager.add(unbookmarkAction);
 			manager.add(new Separator());
-			for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
-				manager.add(showLaunchOtherConfigurationAction);
+			for(ShowLaunchOtherConfigurationsDialogAction showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
+				String mode = showLaunchOtherConfigurationAction.getMode();
+				if(launchNode.supportsMode(mode)) {
+					manager.add(showLaunchOtherConfigurationAction);
+				}
 			}
 		}
 	}
