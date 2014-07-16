@@ -2,6 +2,7 @@ package com.eclipserunner.model.adapters;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart;
 import org.eclipse.jface.viewers.ISelection;
@@ -83,21 +84,32 @@ public class RunnerModelJdtSelectionListenerAdapter implements ISelectionListene
 		Object selectedElement = getSelectedElement(selection);
 		if (selectedElement instanceof WorkingSet) {
 			projectFilter.setProjectName(null);   // clear project filter
+		} else {
+			IResource resource = extractResource(selection);
+			if(resource!=null && resource.getProject()!=null) {
+				projectFilter.setProjectName(resource.getProject().getName());
+			}
 		}
-		else if (selectedElement instanceof JavaProject) {
-			projectFilter.setProjectName(getProjectName((JavaProject) selectedElement));			
-		}
-		// TODO: Implement or remove
-		else {
-			System.out.println("DEBUG: Unhandled PackageExplorer selection: " + selection.getClass().getSimpleName());
-		}		
-	}
-	
-	private String getProjectName(JavaProject javaProject) {
-		IProject project = javaProject.getProject();
-		return project.getName();	
+//		// TODO: Implement or remove
+//		else {
+//			System.out.println("DEBUG: Unhandled PackageExplorer selection: " + selection.getClass().getSimpleName());
+//		}		
 	}
 
+	IResource extractResource(ISelection selection) {
+		if (!(selection instanceof IStructuredSelection))
+			return null;
+		IStructuredSelection ss = (IStructuredSelection) selection;
+		Object element = ss.getFirstElement();
+		if (element instanceof IResource)
+			return (IResource) element;
+		if (!(element instanceof IAdaptable))
+			return null;
+		IAdaptable adaptable = (IAdaptable) element;
+		Object adapter = adaptable.getAdapter(IResource.class);
+		return (IResource) adapter;
+
+	}
 	private Object getSelectedElement(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
