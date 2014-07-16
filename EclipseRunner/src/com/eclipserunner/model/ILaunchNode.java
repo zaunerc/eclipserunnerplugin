@@ -1,7 +1,5 @@
 package com.eclipserunner.model;
 
-import java.util.Set;
-
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 /**

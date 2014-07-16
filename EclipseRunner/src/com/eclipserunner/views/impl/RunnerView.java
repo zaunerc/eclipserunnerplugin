@@ -3,12 +3,9 @@ package com.eclipserunner.views.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
@@ -352,21 +349,22 @@ public class RunnerView extends ViewPart
 		setupMenuItems(manager);
 		setupActionEnablement();
 	}
-
+	private void addIfMode(IMenuManager manager, Action action, ILaunchNode launchNode, String mode) {
+		if(launchNode.supportsMode(mode)) {
+			manager.add(action);
+			action.setChecked(mode.equals(launchNode.getLaunchMode()));
+		}
+		
+	}
 	private void setupMenuItems(IMenuManager manager) {
 		if (selection.firstNodeHasType(ILaunchNode.class)) {
 			ILaunchNode launchNode = selection.getFirstNodeAs(ILaunchNode.class);
-			if(launchNode.supportsMode(ILaunchManager.RUN_MODE)) {
-				manager.add(launchRunConfigurationAction);
-			}
-			if(launchNode.supportsMode(ILaunchManager.DEBUG_MODE)) {
-				manager.add(launchDebugConfigurationAction);
-			}
+			addIfMode(manager,launchRunConfigurationAction, launchNode, ILaunchManager.RUN_MODE);
+			addIfMode(manager,launchDebugConfigurationAction, launchNode, ILaunchManager.DEBUG_MODE);
 			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
-				if(launchNode.supportsMode(otherLaunchAction.getMode())) {
-					manager.add(otherLaunchAction);
-				}
+				addIfMode(manager,otherLaunchAction, launchNode, otherLaunchAction.getMode());
 			}
+	        manager.add(new Separator());
 			manager.add(openItemAction);
 			manager.add(new Separator());
 	        manager.add(moveToCategorySubMenu());
