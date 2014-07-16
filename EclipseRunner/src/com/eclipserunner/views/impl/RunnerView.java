@@ -17,7 +17,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationListener;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.internal.ui.launchConfigurations.LaunchGroupExtension;
-import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -26,7 +25,6 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -64,8 +62,8 @@ import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
 import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
-import com.eclipserunner.views.actions.ShowLaunchOtherConfigurationsDialogAction;
 import com.eclipserunner.views.actions.RunDefaultAction;
+import com.eclipserunner.views.actions.ShowLaunchOtherConfigurationsDialogAction;
 
 /**
  * Class provides plugin eclipse View UI component.
@@ -83,8 +81,6 @@ public class RunnerView extends ViewPart
 	private ILaunchConfigurationListener modelLaunchConfigurationListener;
 	private ILaunchConfigurationListener viewLaunchConfigurationListener;
 	private ISelectionListener selectionListener;
-
-	private IPropertyChangeListener propertyChangeListener;
 
 	private List<ShowLaunchOtherConfigurationsDialogAction> showLaunchOtherConfigurationActions = new ArrayList<ShowLaunchOtherConfigurationsDialogAction>();
 
@@ -230,7 +226,6 @@ public class RunnerView extends ViewPart
 		disposeModel();
 		disposeSelectionListeners();
 		disposeLaunchConfigurationListeners();
-		disposePropertyChangeListeners();
 	}
 
 	private void disposeModel() {
@@ -248,12 +243,6 @@ public class RunnerView extends ViewPart
 		getLaunchManager().removeLaunchConfigurationListener(viewLaunchConfigurationListener);
 	}
 
-	private void disposePropertyChangeListeners() {
-		if (propertyChangeListener != null) {
-			JavaPlugin.getDefault().getPreferenceStore().removePropertyChangeListener(propertyChangeListener);
-			propertyChangeListener = null;
-		}
-	}
 	private void sortModes(IConfigurationElement[] modes) {
 		Arrays.sort(modes, new Comparator<IConfigurationElement>() {
 			String getCompareString(IConfigurationElement e) {
