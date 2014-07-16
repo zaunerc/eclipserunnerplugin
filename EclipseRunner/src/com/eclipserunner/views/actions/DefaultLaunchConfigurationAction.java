@@ -15,7 +15,7 @@ public class DefaultLaunchConfigurationAction extends LaunchConfigurationAction 
 
 	@Override
 	public void run() {
-		if(selection.hasExactlyOneNode()) {
+		if(selection.hasExactlyOneNode() && selection.firstNodeHasType(ILaunchNode.class)) {
 			ILaunchNode launcNode = selection.getFirstNodeAs(ILaunchNode.class);
 			if (launcNode!=null) {
 				String mode = null;

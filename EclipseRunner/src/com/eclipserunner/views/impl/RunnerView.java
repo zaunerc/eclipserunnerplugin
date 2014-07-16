@@ -357,18 +357,18 @@ public class RunnerView extends ViewPart
 		setupMenuItems(manager);
 		setupActionEnablement();
 	}
-	private void addIfMode(IMenuManager manager, Action action, ILaunchNode launchNode, String mode) {
-		if(launchNode.supportsMode(mode)) {
-			manager.add(action);
-			action.setChecked(mode.equals(launchNode.getDefaultMode()));
-		}
-		
-	}
 	private void setupMenuItems(IMenuManager manager) {
-		if (selection.firstNodeHasType(ILaunchNode.class)) {
-			ILaunchNode launchNode = selection.getFirstNodeAs(ILaunchNode.class);
+		ILaunchNode launchNode = null;
+		if(selection.firstNodeHasType(ILaunchNode.class)) {
+			launchNode=selection.getFirstNodeAs(ILaunchNode.class);
+		}
+		if (launchNode != null) {
 			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
-				addIfMode(manager,otherLaunchAction, launchNode, otherLaunchAction.getMode());
+				String mode = otherLaunchAction.getMode();
+				if(launchNode.supportsMode(mode)) {
+					manager.add(otherLaunchAction);
+					otherLaunchAction.setChecked(mode.equals(launchNode.getDefaultMode()));
+				}
 			}
 	        manager.add(new Separator());
 			manager.add(openItemAction);
@@ -380,12 +380,14 @@ public class RunnerView extends ViewPart
 		manager.add(new Separator());
 		manager.add(renameAction);
 		manager.add(removeAction);
-		manager.add(new Separator());
-		manager.add(bookmarkAction);
-		manager.add(unbookmarkAction);
-		manager.add(new Separator());
-		for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
-			manager.add(showLaunchOtherConfigurationAction);
+		if( launchNode != null) {
+			manager.add(new Separator());
+			manager.add(bookmarkAction);
+			manager.add(unbookmarkAction);
+			manager.add(new Separator());
+			for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
+				manager.add(showLaunchOtherConfigurationAction);
+			}
 		}
 	}
 
