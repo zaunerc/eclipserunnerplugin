@@ -25,9 +25,13 @@ public class ProjectFilter extends AbstractFilter {
 			return false;
 		}
 		String launchConfigurationProjectName = getLaunchConfigurationProjectName(launchNode.getLaunchConfiguration());
+		return filter(launchConfigurationProjectName);
+	}
+	boolean filter(String launchConfigurationProjectName) {
+		if(launchConfigurationProjectName == null || getFilterProjectName() == null)
+			return false;
 		return !(getFilterProjectName().equals(launchConfigurationProjectName));
 	}
-
 	@Override
 	public boolean filterWhenActive(ICategoryNode categoryNode) {
 		if (getFilterProjectName() == null) {
@@ -35,7 +39,7 @@ public class ProjectFilter extends AbstractFilter {
 		}
 		for (ILaunchNode launchNode : categoryNode.getLaunchNodes()) {
 			String launchConfigurationProjectName = getLaunchConfigurationProjectName(launchNode.getLaunchConfiguration());
-			if (getFilterProjectName().equals(launchConfigurationProjectName)) {
+			if (!filter(launchConfigurationProjectName)) {
 				return false;
 			}
 		}
