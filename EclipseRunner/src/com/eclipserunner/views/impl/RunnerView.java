@@ -1,8 +1,11 @@
 package com.eclipserunner.views.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -78,13 +81,9 @@ public class RunnerView extends ViewPart
 
 	private IPropertyChangeListener propertyChangeListener;
 
-	private Action showRunConfigurationsDialogAction;
-	private Action showDebugConfigurationsDialogAction;
 	private List<Action> showLaunchOtherConfigurationActions = new ArrayList<Action>();
 
-	private Action launchRunConfigurationAction;
-	private Action launchDefuaultConfigurationAction;
-	private Action launchDebugConfigurationAction;
+	private Action launchDefaultConfigurationAction;
 	private List<LaunchOtherConfigurationAction> launchOtherConfigurationActions = new ArrayList<LaunchOtherConfigurationAction>();
 	private Action openItemAction;
 
@@ -236,41 +235,52 @@ public class RunnerView extends ViewPart
 			propertyChangeListener = null;
 		}
 	}
-
+	private void sortModes(IConfigurationElement[] modes) {
+		Arrays.sort(modes, new Comparator<IConfigurationElement>() {
+			String getCompareString(IConfigurationElement e) {
+				String mode = e.getAttribute("mode");
+				if(ILaunchManager.RUN_MODE.equals(mode)) {
+					return " 1";
+				} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
+					return " 2";
+				} else if(ILaunchManager.PROFILE_MODE.equals(mode)) {
+					return " 3";
+				}
+				return e.getAttribute("label").replaceAll("&", "");
+			}
+			public int compare(IConfigurationElement o1,
+					IConfigurationElement o2) {
+				return getCompareString(o1).compareTo(getCompareString(o2));
+			}
+		});
+	}
 	private void setupLaunchActions() {
-		showRunConfigurationsDialogAction   = builder.createShowRunConfigurationDialogAction();
-		showDebugConfigurationsDialogAction = builder.createShowDebugConfigurationDialogAction();
-		launchRunConfigurationAction        = builder.createRunConfigurationAction();
-		launchDefuaultConfigurationAction   = builder.createDefaultConfigurationAction();
-		launchDebugConfigurationAction      = builder.createDebugConfigurationAction();
+		launchDefaultConfigurationAction   = builder.createDefaultConfigurationAction();
 
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] launchModes = reg.getConfigurationElementsFor("org.eclipse.debug.core.launchModes");
 		IConfigurationElement[] launchGroups = reg.getConfigurationElementsFor("org.eclipse.debug.ui.launchGroups");
-
+		sortModes(launchModes);
 		for( int i = 0; i < launchModes.length; i++ ) {
-			// FIXME: Ignore default runners, they all seem to start with &
-			if(!launchModes[i].getAttribute("label").startsWith("&")) {
-				String mode = launchModes[i].getAttribute("mode");
-				LaunchGroupExtension launchGroupExtension = null;
-				ImageDescriptor image = null;
+			String mode = launchModes[i].getAttribute("mode");
+			LaunchGroupExtension launchGroupExtension = null;
+			ImageDescriptor image = null;
 
-				for( IConfigurationElement launchGroup : launchGroups ) {
-					if( launchGroup.getAttribute("mode").equals(mode) ) {
-						launchGroupExtension = new LaunchGroupExtension(launchGroup);
-						image = launchGroupExtension.getImageDescriptor();
-						break;
-					}
+			for( IConfigurationElement launchGroup : launchGroups ) {
+				if( launchGroup.getAttribute("mode").equals(mode) ) {
+					launchGroupExtension = new LaunchGroupExtension(launchGroup);
+					image = launchGroupExtension.getImageDescriptor();
+					break;
 				}
+			}
 
-				launchOtherConfigurationActions.add((LaunchOtherConfigurationAction)builder.createLaunchOtherConfigurationAction(mode,
-						launchModes[i].getAttribute("label"), launchModes[i].getAttribute("label"), image));
+			launchOtherConfigurationActions.add((LaunchOtherConfigurationAction)builder.createLaunchOtherConfigurationAction(mode,
+					launchModes[i].getAttribute("label"), launchModes[i].getAttribute("label"), image));
 
-				if( launchGroupExtension != null ) {
-					String label = String.format("Open %1$s configurations ...", launchGroupExtension.getMode());
-					showLaunchOtherConfigurationActions.add(builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
-							label, label, image));
-				}
+			if( launchGroupExtension != null ) {
+				String label = String.format("Open %1$s configurations ...", launchGroupExtension.getMode());
+				showLaunchOtherConfigurationActions.add(builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
+						label, label, image));
 			}
 		}
 
@@ -327,8 +337,6 @@ public class RunnerView extends ViewPart
 		manager.add(toggleActiveWorkingSetFilterAction);
 		manager.add(toggleActiveProjektFilterAction);
 		manager.add(new Separator());
-		manager.add(showRunConfigurationsDialogAction);
-		manager.add(showDebugConfigurationsDialogAction);
 		for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
 			manager.add(showLaunchOtherConfigurationAction);
 		}
@@ -359,8 +367,6 @@ public class RunnerView extends ViewPart
 	private void setupMenuItems(IMenuManager manager) {
 		if (selection.firstNodeHasType(ILaunchNode.class)) {
 			ILaunchNode launchNode = selection.getFirstNodeAs(ILaunchNode.class);
-			addIfMode(manager,launchRunConfigurationAction, launchNode, ILaunchManager.RUN_MODE);
-			addIfMode(manager,launchDebugConfigurationAction, launchNode, ILaunchManager.DEBUG_MODE);
 			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
 				addIfMode(manager,otherLaunchAction, launchNode, otherLaunchAction.getMode());
 			}
@@ -378,8 +384,6 @@ public class RunnerView extends ViewPart
 		manager.add(bookmarkAction);
 		manager.add(unbookmarkAction);
 		manager.add(new Separator());
-		manager.add(showRunConfigurationsDialogAction);
-		manager.add(showDebugConfigurationsDialogAction);
 		for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
 			manager.add(showLaunchOtherConfigurationAction);
 		}
@@ -400,8 +404,6 @@ public class RunnerView extends ViewPart
 	}
 
 	private void setupActionEnablement() {
-		launchRunConfigurationAction.setEnabled(selection.canBeLaunched());
-		launchDebugConfigurationAction.setEnabled(selection.canBeLaunched());
 		for(Action otherLaunchAction : launchOtherConfigurationActions) {
 			otherLaunchAction.setEnabled(selection.canBeLaunched());
 		}
@@ -413,7 +415,7 @@ public class RunnerView extends ViewPart
 	}
 
 	public void doubleClick(DoubleClickEvent event) {
-		launchDefuaultConfigurationAction.run();
+		launchDefaultConfigurationAction.run();
 	}
 
 	public boolean shouldRunInDebugMode() {

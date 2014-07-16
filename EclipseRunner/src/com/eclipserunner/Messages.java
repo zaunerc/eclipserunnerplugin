@@ -21,13 +21,9 @@ public class Messages extends NLS {
 
 	public static String Message_runConfiguration;
 	public static String Message_runConfigurationTooltip;
-	public static String Message_openRunConfigurationsDialog;
-	public static String Message_openRunConfigurationsDialogTooltip;
 
 	public static String Message_debugConfiguration;
 	public static String Message_debugConfigurationTooltip;
-	public static String Message_openDebugConfigurationsDialog;
-	public static String Message_openDebugConfigurationsDialogTooltip;
 	public static String Message_openItem;
 	public static String Message_openItemTooltip;
 

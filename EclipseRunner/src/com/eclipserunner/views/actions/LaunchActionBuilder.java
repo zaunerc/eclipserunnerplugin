@@ -4,22 +4,16 @@ import static com.eclipserunner.Messages.Message_addNewCategory;
 import static com.eclipserunner.Messages.Message_addNewCategoryTooltip;
 import static com.eclipserunner.Messages.Message_bookmark;
 import static com.eclipserunner.Messages.Message_bookmarkTooltip;
-import static com.eclipserunner.Messages.Message_unbookmark;
-import static com.eclipserunner.Messages.Message_unbookmarkTooltip;
 import static com.eclipserunner.Messages.Message_collapseAll;
 import static com.eclipserunner.Messages.Message_collapseAllTooltip;
-import static com.eclipserunner.Messages.Message_openItem;
-import static com.eclipserunner.Messages.Message_openItemTooltip;
 import static com.eclipserunner.Messages.Message_createToggleDefaultCategory;
 import static com.eclipserunner.Messages.Message_createToggleDefaultCategoryTooltip;
-import static com.eclipserunner.Messages.Message_debugConfiguration;
-import static com.eclipserunner.Messages.Message_debugConfigurationTooltip;
+import static com.eclipserunner.Messages.Message_createToggleDefaultRunMode;
+import static com.eclipserunner.Messages.Message_createToggleDefaultRunModeTooltip;
 import static com.eclipserunner.Messages.Message_expandAll;
 import static com.eclipserunner.Messages.Message_expandAllTooltip;
-import static com.eclipserunner.Messages.Message_openDebugConfigurationsDialog;
-import static com.eclipserunner.Messages.Message_openDebugConfigurationsDialogTooltip;
-import static com.eclipserunner.Messages.Message_openRunConfigurationsDialog;
-import static com.eclipserunner.Messages.Message_openRunConfigurationsDialogTooltip;
+import static com.eclipserunner.Messages.Message_openItem;
+import static com.eclipserunner.Messages.Message_openItemTooltip;
 import static com.eclipserunner.Messages.Message_remove;
 import static com.eclipserunner.Messages.Message_removeTooltip;
 import static com.eclipserunner.Messages.Message_rename;
@@ -32,8 +26,8 @@ import static com.eclipserunner.Messages.Message_treeModeFlat;
 import static com.eclipserunner.Messages.Message_treeModeFlatTooltip;
 import static com.eclipserunner.Messages.Message_treeModeWithTypes;
 import static com.eclipserunner.Messages.Message_treeModeWithTypesTooltip;
-import static com.eclipserunner.Messages.Message_createToggleDefaultRunMode;
-import static com.eclipserunner.Messages.Message_createToggleDefaultRunModeTooltip;
+import static com.eclipserunner.Messages.Message_unbookmark;
+import static com.eclipserunner.Messages.Message_unbookmarkTooltip;
 import static org.eclipse.debug.ui.IDebugUIConstants.ID_DEBUG_LAUNCH_GROUP;
 import static org.eclipse.debug.ui.IDebugUIConstants.ID_RUN_LAUNCH_GROUP;
 
@@ -91,22 +85,6 @@ public final class LaunchActionBuilder {
 		return this;
 	}
 
-	public Action createShowRunConfigurationDialogAction() {
-		return decorate(new ShowLaunchConfigurationsDialogAction(nodeSelection, ID_RUN_LAUNCH_GROUP))
-			.withTitle(Message_openRunConfigurationsDialog)
-			.withTooltip(Message_openRunConfigurationsDialogTooltip)
-			.withImage(Image.RUN_CONFIGURATIONS)
-			.andReleaseAction();
-	}
-
-	public Action createShowDebugConfigurationDialogAction() {
-		return decorate(new ShowLaunchConfigurationsDialogAction(nodeSelection, ID_DEBUG_LAUNCH_GROUP))
-			.withTitle(Message_openDebugConfigurationsDialog)
-			.withTooltip(Message_openDebugConfigurationsDialogTooltip)
-			.withImage(Image.DEBUG_CONFIGURATIONS)
-			.andReleaseAction();
-	}
-
 	public Action createShowLaunchOtherConfigurationDialogAction(LaunchGroupExtension launchGroupExtension, String title, String tooltip, ImageDescriptor image) {
 		return decorate(new ShowLaunchOtherConfigurationsDialogAction(nodeSelection, launchGroupExtension))
 			.withTitle(title)
@@ -115,27 +93,11 @@ public final class LaunchActionBuilder {
 			.andReleaseAction();
 	}
 
-	public Action createRunConfigurationAction() {
-		return decorate(new LaunchConfigurationAction(nodeSelection, ID_RUN_LAUNCH_GROUP))
-			.withTitle(Message_runConfiguration)
-			.withTooltip(Message_runConfigurationTooltip)
-			.withImage(Image.RUN)
-			.andReleaseAction();
-	}
-
 	public Action createDefaultConfigurationAction() {
 		return decorate(new DefaultLaunchConfigurationAction(nodeSelection, ID_RUN_LAUNCH_GROUP))
 			.withTitle(Message_runConfiguration)
 			.withTooltip(Message_runConfigurationTooltip)
 			.withImage(Image.RUN)
-			.andReleaseAction();
-	}
-
-	public Action createDebugConfigurationAction() {
-		return decorate(new LaunchConfigurationAction(nodeSelection, ID_DEBUG_LAUNCH_GROUP))
-			.withTitle(Message_debugConfiguration)
-			.withTooltip(Message_debugConfigurationTooltip)
-			.withImage(Image.DEBUG)
 			.andReleaseAction();
 	}
 
