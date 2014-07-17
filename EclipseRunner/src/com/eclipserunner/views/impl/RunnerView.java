@@ -61,6 +61,7 @@ import com.eclipserunner.ui.dnd.RunnerViewDragListener;
 import com.eclipserunner.ui.dnd.RunnerViewDropListener;
 import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
+import com.eclipserunner.views.actions.Image;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
 import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
 import com.eclipserunner.views.actions.RunDefaultAction;
@@ -269,6 +270,11 @@ public class RunnerView extends ViewPart
 				if( launchGroup.getAttribute("mode").equals(mode) ) {
 					launchGroupExtension = new LaunchGroupExtension(launchGroup);
 					image = launchGroupExtension.getImageDescriptor();
+					if(ILaunchManager.RUN_MODE.equals(mode)) {
+						image=getImageDescriptor(Image.RUN);
+					} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
+						image=getImageDescriptor(Image.DEBUG);
+					}
 					break;
 				}
 			}
@@ -278,6 +284,11 @@ public class RunnerView extends ViewPart
 
 			if( launchGroupExtension != null ) {
 				String label = String.format("Open %1$s configurations ...", launchGroupExtension.getMode());
+				if(ILaunchManager.RUN_MODE.equals(mode)) {
+					image=getImageDescriptor(Image.RUN_CONFIGURATIONS);
+				} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
+					image=getImageDescriptor(Image.DEBUG_CONFIGURATIONS);
+				}
 				showLaunchOtherConfigurationActions.add((ShowLaunchOtherConfigurationsDialogAction) builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
 						label, label, image));
 			}
@@ -294,12 +305,17 @@ public class RunnerView extends ViewPart
 		toggleFlatModeAction                = builder.createToggleFlatModeAction();
 		toggleTypeModeAction                = builder.createToggleTypeModeAction();
 		toggleDefaultCategoryAction         = builder.createToggleDefaultCategoryAction();
-		RunDefaultActionAction			= builder.createRunDefaultAction();
+		RunDefaultActionAction              = builder.createRunDefaultAction();
 		toggleBookmarkModeAction            = builder.createToggleBookmarkModeAction();
 		toggleClosedProjectFilterAction     = builder.createToggleClosedProjectFilterAction();
 		toggleDelectedProjectFilterAction   = builder.createDelectedProjectFilterAction();
 		toggleActiveWorkingSetFilterAction  = builder.createActiveWorkingSetFilterAction();
 		toggleActiveProjektFilterAction     = builder.createActiveProjektFilterAction();
+	}
+
+
+	private ImageDescriptor getImageDescriptor(Image img) {
+		return RunnerPlugin.getDefault().getImageDescriptor(img.getPath());
 	}
 
 	private void setupActionBuilder() {
