@@ -3,6 +3,7 @@ package com.eclipserunner.model.filters;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import com.eclipserunner.model.ICategoryNode;
+import com.eclipserunner.model.IExpandable;
 import com.eclipserunner.model.ILaunchNode;
 import com.eclipserunner.model.IRunnerModel;
 import com.eclipserunner.model.common.AbstractFilter;
@@ -23,7 +24,7 @@ public class DefaultCategoryFilter extends AbstractFilter {
 
 	@Override
 	public boolean filterWhenActive(ICategoryNode categoryNode) {
-		ICategoryNode defaultCategoryNode = runnerModel.getDefaultCategoryNode();
+		IExpandable defaultCategoryNode = runnerModel.getDefaultCategoryNode();
 		if (defaultCategoryNode.equals(categoryNode)) {
 			return true;
 		}

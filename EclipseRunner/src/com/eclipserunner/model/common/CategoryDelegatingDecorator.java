@@ -14,6 +14,14 @@ public class CategoryDelegatingDecorator implements ICategoryNode {
 
 	protected final ICategoryNode category;
 	
+	public boolean isExpandChild(String identifier) {
+		return category.isExpandChild(identifier);
+	}
+
+	public void setExpandChild(boolean expanded, String identifier) {
+		category.setExpandChild(expanded, identifier);
+	}
+
 	public CategoryDelegatingDecorator(ICategoryNode category) {
 		this.category = category;
 	}

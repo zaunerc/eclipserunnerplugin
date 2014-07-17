@@ -32,6 +32,7 @@ public class CategoryNode implements ICategoryNode, ILaunchNodeChangeListener, I
 	private String name;
 	private Set<ILaunchNode> launchNodes = new TreeSet<ILaunchNode>(new LaunchNodeComparator());
 	private Set<ICategoryNodeChangeListener> categoryNodeChangeListeners = new HashSet<ICategoryNodeChangeListener>();
+	private Set<String> expandedChildren = new TreeSet<String>();
 
 	private boolean removable  = true;
 	private boolean renameable = true;
@@ -155,4 +156,16 @@ public class CategoryNode implements ICategoryNode, ILaunchNodeChangeListener, I
 		this.expanded = expanded;		
 	}
 
+	public boolean isExpandChild(String identifier) {
+		return expandedChildren.contains(identifier);
+	}
+
+	public void setExpandChild(boolean expanded, String identifier) {
+		if(expanded) {
+			expandedChildren.add(identifier);
+		} else {
+			expandedChildren.remove(identifier);
+			
+		}
+	}
 }

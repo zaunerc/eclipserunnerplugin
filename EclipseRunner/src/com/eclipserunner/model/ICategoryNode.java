@@ -7,13 +7,10 @@ import java.util.Collection;
  *
  * @author vachacz
  */
-public interface ICategoryNode extends IActionEnablement, IBookmarkable, IDroppable {
+public interface ICategoryNode extends IActionEnablement, IBookmarkable, IDroppable, IExpandable {
 
 	String getName();
 	void setName(String name);
-	
-	boolean isExpanded();
-	void setExpanded(boolean expanded);
 	
 	Collection<ILaunchNode> getLaunchNodes();
 
@@ -23,4 +20,6 @@ public interface ICategoryNode extends IActionEnablement, IBookmarkable, IDroppa
 	void addCategoryNodeChangeListener(ICategoryNodeChangeListener categoryNodeChangeListener);
 	void removeCategoryNodeChangeListener(ICategoryNodeChangeListener categoryNodeChangeListener);
 
+	boolean isExpandChild(String identifier);
+	void setExpandChild(boolean expanded, String identifier);
 }

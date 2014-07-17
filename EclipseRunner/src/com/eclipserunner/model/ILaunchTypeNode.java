@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.eclipse.debug.core.ILaunchConfigurationType;
 
-public interface ILaunchTypeNode extends IBookmarkable, IDroppable {
+public interface ILaunchTypeNode extends IBookmarkable, IDroppable, IExpandable {
 
 	ILaunchConfigurationType getLaunchConfigurationType();
 	void setLaunchConfigurationType(ILaunchConfigurationType launchConfigurationType);

@@ -50,6 +50,7 @@ import org.eclipse.ui.part.ViewPart;
 import com.eclipserunner.Messages;
 import com.eclipserunner.RunnerPlugin;
 import com.eclipserunner.model.ICategoryNode;
+import com.eclipserunner.model.IExpandable;
 import com.eclipserunner.model.IFilteredRunnerModel;
 import com.eclipserunner.model.ILaunchNode;
 import com.eclipserunner.model.IModelChangeListener;
@@ -152,14 +153,14 @@ public class RunnerView extends ViewPart
 		viewer.addTreeListener(new ITreeViewerListener() {
 			public void treeExpanded(TreeExpansionEvent event) {
 				Object element = event.getElement();
-				if(element instanceof ICategoryNode) {
-					((ICategoryNode) element).setExpanded(true);
+				if(element instanceof IExpandable) {
+					((IExpandable) element).setExpanded(true);
 				}
 			}
 			public void treeCollapsed(TreeExpansionEvent event) {
 				Object element = event.getElement();
-				if(element instanceof ICategoryNode) {
-					((ICategoryNode) element).setExpanded(false);
+				if(element instanceof IExpandable) {
+					((IExpandable) element).setExpanded(false);
 				}
 			}
 		});
@@ -512,14 +513,20 @@ public class RunnerView extends ViewPart
 
 
 	private void updateExpansion() {
-		Collection<ICategoryNode> newexpanded = new ArrayList<ICategoryNode>();
+		Collection<Object> expanded = new ArrayList<Object>();
+		ITreeContentProvider contentProvider=(ITreeContentProvider) RunnerModelProvider.getInstance().getTreeContentProvider();
 		Collection<ICategoryNode> nodes = RunnerModelProvider.getInstance().getDefaultModel().getCategoryNodes();
 		for (ICategoryNode categroy : nodes) {
 			if(categroy.isExpanded()) {
-				newexpanded.add(categroy);
+				expanded.add(categroy);
+			}
+			for (Object child : contentProvider.getChildren(categroy)) {
+				if(child instanceof IExpandable && ((IExpandable) child).isExpanded()) {
+					expanded.add(child);
+				}
 			}
 		}
-		getViewer().setExpandedElements(newexpanded.toArray());
+		getViewer().setExpandedElements(expanded.toArray());
 	}
 
 }

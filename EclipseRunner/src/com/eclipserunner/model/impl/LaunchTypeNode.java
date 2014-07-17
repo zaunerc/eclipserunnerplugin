@@ -101,4 +101,12 @@ public class LaunchTypeNode implements ILaunchTypeNode, IActionEnablement {
 		return categoryNode.drop(launchNodesToMove);
 	}
 
+	public boolean isExpanded() {
+		return getCategoryNode().isExpandChild(launchConfigurationType.getIdentifier());
+	}
+
+	public void setExpanded(boolean expanded) {
+		getCategoryNode().setExpandChild(expanded,launchConfigurationType.getIdentifier());
+	}
+
 }
