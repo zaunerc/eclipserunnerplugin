@@ -242,8 +242,8 @@ public class RunnerView extends ViewPart
 
 		openItemAction                      = builder.createOpenItemAction();
 		addNewCategoryAction                = builder.createAddNewCategoryAction();
-		collapseAllAction                   = builder.createCollapseAllAction(viewer);
-		expandAllAction                     = builder.createExpandAllAction(viewer);
+		collapseAllAction                   = builder.createCollapseAllAction(this);
+		expandAllAction                     = builder.createExpandAllAction(this);
 		bookmarkAction                      = builder.createBookmarkAction();
 		unbookmarkAction                    = builder.createUnbookmarkAction();
 		renameAction                        = builder.createRenameAction();
@@ -574,7 +574,7 @@ public class RunnerView extends ViewPart
 
 	private void updateExpansion() {
 		Collection<Object> expanded = new ArrayList<Object>();
-		ITreeContentProvider contentProvider=(ITreeContentProvider) RunnerModelProvider.getInstance().getTreeContentProvider();
+		ITreeContentProvider contentProvider=(ITreeContentProvider) viewer.getContentProvider();
 		Collection<ICategoryNode> nodes = RunnerModelProvider.getInstance().getDefaultModel().getCategoryNodes();
 		for (ICategoryNode categroy : nodes) {
 			if(categroy.isExpanded()) {
@@ -588,5 +588,27 @@ public class RunnerView extends ViewPart
 		}
 		getViewer().setExpandedElements(expanded.toArray());
 	}
+	
+	private void setExpanded(ITreeContentProvider contentProvider, Object[] children, boolean expanded) {
+		if(children==null)
+			return;
+		for (Object child : children) {
+			if(child instanceof IExpandable) {
+				((IExpandable) child).setExpanded(expanded);
+			}
+			setExpanded(contentProvider, contentProvider.getChildren(child),expanded);
+		}
+	}
+	
+	public void expandAll() {
+		viewer.expandAll();
+		ITreeContentProvider contentProvider=(ITreeContentProvider) viewer.getContentProvider();
+		setExpanded(contentProvider,contentProvider.getElements(viewer.getInput()),true);
+	}
 
+	public void collapseAll() {
+		viewer.collapseAll();
+		ITreeContentProvider contentProvider=(ITreeContentProvider) viewer.getContentProvider();
+		setExpanded(contentProvider,contentProvider.getElements(viewer.getInput()),false);
+	}
 }

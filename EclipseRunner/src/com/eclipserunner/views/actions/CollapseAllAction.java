@@ -1,21 +1,22 @@
 package com.eclipserunner.views.actions;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.viewers.TreeViewer;
+
+import com.eclipserunner.views.IRunnerView;
 
 /**
  * @author vachacz
  */
 public class CollapseAllAction extends Action {
 
-	private TreeViewer viewer;
+	private IRunnerView view;
 
-	public CollapseAllAction(TreeViewer viewer) {
-		this.viewer = viewer;
+	public CollapseAllAction(IRunnerView view) {
+		this.view = view;
 	}
 
 	@Override
 	public void run() {
-		viewer.collapseAll();
+		view.collapseAll();
 	}
 }

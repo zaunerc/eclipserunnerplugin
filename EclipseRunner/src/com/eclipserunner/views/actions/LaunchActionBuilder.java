@@ -49,6 +49,7 @@ import com.eclipserunner.model.INodeSelection;
 import com.eclipserunner.model.IRunnerModel;
 import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
+import com.eclipserunner.views.impl.RunnerView;
 
 /**
  * Builder creates Actions related to test launching
@@ -124,16 +125,16 @@ public final class LaunchActionBuilder {
 			.andReleaseAction();
 	}
 
-	public Action createCollapseAllAction(TreeViewer viewer) {
-		return decorate(new CollapseAllAction(viewer))
+	public Action createCollapseAllAction(IRunnerView view) {
+		return decorate(new CollapseAllAction(view))
 			.withTitle(Message_collapseAll)
 			.withTooltip(Message_collapseAllTooltip)
 			.withSharedImage(ISharedImages.IMG_ELCL_COLLAPSEALL)
 			.andReleaseAction();
 	}
 
-	public Action createExpandAllAction(TreeViewer viewer) {
-		return decorate(new ExpandAllAction(viewer))
+	public Action createExpandAllAction(IRunnerView view) {
+		return decorate(new ExpandAllAction(view))
 			.withTitle(Message_expandAll)
 			.withTooltip(Message_expandAllTooltip)
 			.withImage(Image.EXPAND_ALL)
