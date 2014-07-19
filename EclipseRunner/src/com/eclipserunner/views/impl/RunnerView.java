@@ -108,7 +108,7 @@ public class RunnerView extends ViewPart
 
 	private Action toggleClosedProjectFilterAction;
 	private Action toggleDelectedProjectFilterAction;
-	private Action toggleActiveWorkingSetFilterAction;
+//	private Action toggleActiveWorkingSetFilterAction;
 	private Action toggleActiveProjektFilterAction;
 
 	private LaunchActionBuilder builder;
@@ -255,7 +255,7 @@ public class RunnerView extends ViewPart
 		toggleBookmarkModeAction            = builder.createToggleBookmarkModeAction();
 		toggleClosedProjectFilterAction     = builder.createToggleClosedProjectFilterAction();
 		toggleDelectedProjectFilterAction   = builder.createDelectedProjectFilterAction();
-		toggleActiveWorkingSetFilterAction  = builder.createActiveWorkingSetFilterAction();
+//		toggleActiveWorkingSetFilterAction  = builder.createActiveWorkingSetFilterAction();
 		toggleActiveProjektFilterAction     = builder.createActiveProjektFilterAction();
 	}
 
@@ -391,7 +391,7 @@ public class RunnerView extends ViewPart
 		manager.add(new Separator());
 		manager.add(toggleClosedProjectFilterAction);
 		manager.add(toggleDelectedProjectFilterAction);
-		manager.add(toggleActiveWorkingSetFilterAction);
+//		manager.add(toggleActiveWorkingSetFilterAction);
 		manager.add(toggleActiveProjektFilterAction);
 		manager.add(new Separator());
 		for(Action showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
