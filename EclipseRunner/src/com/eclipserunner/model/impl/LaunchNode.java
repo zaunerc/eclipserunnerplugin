@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.DebugUITools;
 
@@ -120,9 +121,16 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 		setDefaultMode(mode);
 		DebugUITools.launch(getLaunchConfiguration(),mode);
 	}
+	private boolean equalsNull(Object o1, Object o2) {
+		return o1 == null ? o2 == null : o1.equals(o2);
+	}
 
-	public boolean supportsMode(String mode) {
+	public boolean supportsMode(String mode, String category) {
 		try {
+			ILaunchConfigurationType type = getLaunchConfiguration().getType();
+			if(!equalsNull(type.getCategory(),category)) {
+				return false;
+			}
 			return getLaunchConfiguration().supportsMode(mode);
 		} catch (CoreException e) {
 			return true;

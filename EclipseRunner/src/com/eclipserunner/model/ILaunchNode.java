@@ -21,7 +21,7 @@ public interface ILaunchNode extends IBookmarkable, IDroppable {
 	 */
 	void setDefaultMode(String mode);
 	String getDefaultMode();
-	boolean supportsMode(String mode);
+	boolean supportsMode(String mode, String category);
 	
 	void launch(String mode);
 }

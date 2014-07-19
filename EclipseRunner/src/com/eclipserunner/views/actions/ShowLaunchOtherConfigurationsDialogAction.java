@@ -54,5 +54,8 @@ public class ShowLaunchOtherConfigurationsDialogAction extends BaseRunnerAction 
 	public String getMode() {
 		return launchGroupExtension.getMode();
 	}
+	public String getCategory() {
+		return launchGroupExtension.getCategory();
+	}
 
 }

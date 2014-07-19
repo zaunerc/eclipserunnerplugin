@@ -61,7 +61,6 @@ import com.eclipserunner.ui.dnd.RunnerViewDragListener;
 import com.eclipserunner.ui.dnd.RunnerViewDropListener;
 import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
-import com.eclipserunner.views.actions.Image;
 import com.eclipserunner.views.actions.LaunchActionBuilder;
 import com.eclipserunner.views.actions.LaunchOtherConfigurationAction;
 import com.eclipserunner.views.actions.RunDefaultAction;
@@ -235,64 +234,11 @@ public class RunnerView extends ViewPart
 		getLaunchManager().removeLaunchConfigurationListener(viewLaunchConfigurationListener);
 	}
 
-	private void sortModes(IConfigurationElement[] modes) {
-		Arrays.sort(modes, new Comparator<IConfigurationElement>() {
-			String getCompareString(IConfigurationElement e) {
-				String mode = e.getAttribute("mode");
-				if(ILaunchManager.RUN_MODE.equals(mode)) {
-					return " 1";
-				} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
-					return " 2";
-				} else if(ILaunchManager.PROFILE_MODE.equals(mode)) {
-					return " 3";
-				}
-				return e.getAttribute("label").replaceAll("&", "");
-			}
-			public int compare(IConfigurationElement o1,
-					IConfigurationElement o2) {
-				return getCompareString(o1).compareTo(getCompareString(o2));
-			}
-		});
-	}
 	private void setupLaunchActions() {
 		launchDefaultConfigurationAction   = builder.createDefaultConfigurationAction();
 
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] launchModes = reg.getConfigurationElementsFor("org.eclipse.debug.core.launchModes");
-		IConfigurationElement[] launchGroups = reg.getConfigurationElementsFor("org.eclipse.debug.ui.launchGroups");
-		sortModes(launchModes);
-		for( int i = 0; i < launchModes.length; i++ ) {
-			String mode = launchModes[i].getAttribute("mode");
-			LaunchGroupExtension launchGroupExtension = null;
-			ImageDescriptor image = null;
-
-			for( IConfigurationElement launchGroup : launchGroups ) {
-				if( launchGroup.getAttribute("mode").equals(mode) ) {
-					launchGroupExtension = new LaunchGroupExtension(launchGroup);
-					image = launchGroupExtension.getImageDescriptor();
-					if(ILaunchManager.RUN_MODE.equals(mode)) {
-						image=getImageDescriptor(Image.RUN);
-					} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
-						image=getImageDescriptor(Image.DEBUG);
-					}
-					break;
-				}
-			}
-
-			launchOtherConfigurationActions.add((LaunchOtherConfigurationAction)builder.createLaunchOtherConfigurationAction(mode,
-					launchModes[i].getAttribute("label"), launchModes[i].getAttribute("label"), image));
-
-			if( launchGroupExtension != null ) {
-				String label = String.format("Open %1$s configurations ...", launchGroupExtension.getMode());
-				if(ILaunchManager.RUN_MODE.equals(mode)) {
-					image=getImageDescriptor(Image.RUN_CONFIGURATIONS);
-				} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
-					image=getImageDescriptor(Image.DEBUG_CONFIGURATIONS);
-				}
-				showLaunchOtherConfigurationActions.add((ShowLaunchOtherConfigurationsDialogAction) builder.createShowLaunchOtherConfigurationDialogAction(launchGroupExtension,
-						label, label, image));
-			}
-		}
+		setupLaunchOpenActions();
+		setupLaunchExecuteActions();
 
 		openItemAction                      = builder.createOpenItemAction();
 		addNewCategoryAction                = builder.createAddNewCategoryAction();
@@ -313,9 +259,105 @@ public class RunnerView extends ViewPart
 		toggleActiveProjektFilterAction     = builder.createActiveProjektFilterAction();
 	}
 
+	private String getCompareModeString(IConfigurationElement e) {
+		String mode = e.getAttribute("mode");
+		if(ILaunchManager.RUN_MODE.equals(mode)) {
+			return " 1";
+		} else if(ILaunchManager.DEBUG_MODE.equals(mode)) {
+			return " 2";
+		} else if(ILaunchManager.PROFILE_MODE.equals(mode)) {
+			return " 3";
+		}
+		return e.getAttribute("label").replaceAll("&", "");
+	}
+	/**
+	 * Sorts the configuration elements by modes. It makes sure that the run, debug, profile mode
+	 * comes first in that order....
+	 * @param elements
+	 */
+	private void sortModes(IConfigurationElement[] elements) {
+		Arrays.sort(elements, new Comparator<IConfigurationElement>() {
+			public int compare(IConfigurationElement o1,
+					IConfigurationElement o2) {
+				return getCompareModeString(o1).compareTo(getCompareModeString(o2));
+			}
+		});
+	}
+	/**
+	 * Creates 'launch' and 'open configuration' actions for each launch group
+	 */
+	private void setupLaunchExecuteActions() {
+		// see https://www.eclipse.org/articles/Article-Launch-Framework/launch.html
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		IConfigurationElement[] launchGroups = reg.getConfigurationElementsFor("org.eclipse.debug.ui.launchGroups");
+		IConfigurationElement[] launchModes = reg.getConfigurationElementsFor("org.eclipse.debug.core.launchModes");
+		sortModes(launchGroups);
+		for( IConfigurationElement launchGroup : launchGroups ) {
+			String category = launchGroup.getAttribute("category");
+			String mode = launchGroup.getAttribute("mode");
+			LaunchGroupExtension launchGroupExtension = new LaunchGroupExtension(launchGroup);
+			ImageDescriptor image = launchGroupExtension.getImageDescriptor();
+			String label = launchGroup.getAttribute("label");
+			// we need to find the label (Run, Debug etc) in the launch modes....
+			for( IConfigurationElement launchMode : launchModes ) {
+				if(mode.equals(launchMode.getAttribute("mode"))) {
+					label = launchMode.getAttribute("label");
+					break;
+				}
+			}
+			launchOtherConfigurationActions.add(builder.createLaunchOtherConfigurationAction(
+					mode, category, label, label, image
+			));
+		}
+	}
 
-	private ImageDescriptor getImageDescriptor(Image img) {
-		return RunnerPlugin.getDefault().getImageDescriptor(img.getPath());
+	
+	/**
+	 * Sorts elements first by category (with null category first) and then by mode.
+	 * @param elements
+	 */
+	private void sortCategoryModes(IConfigurationElement[] elements) {
+		Arrays.sort(elements, new Comparator<IConfigurationElement>() {
+			private String getCompareCategoryString(IConfigurationElement e) {
+				String category = e.getAttribute("category");
+				if(category==null)
+					category=" ";
+				return category;
+			}
+			public int compare(IConfigurationElement o1,
+					IConfigurationElement o2) {
+				int result = getCompareCategoryString(o1).compareTo(getCompareCategoryString(o2));
+				if(result!=0)
+					return result;
+				return getCompareModeString(o1).compareTo(getCompareModeString(o2));
+			}
+		});
+	}
+
+	/**
+	 * Creates 'launch' and 'open configuration' actions for each launch group
+	 */
+	private void setupLaunchOpenActions() {
+		// see https://www.eclipse.org/articles/Article-Launch-Framework/launch.html
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		IConfigurationElement[] launchGroups = reg.getConfigurationElementsFor("org.eclipse.debug.ui.launchGroups");
+		sortCategoryModes(launchGroups);
+		for( IConfigurationElement launchGroup : launchGroups ) {
+			LaunchGroupExtension launchGroupExtension = new LaunchGroupExtension(launchGroup);
+			if( launchGroupExtension != null ) {
+				String category = launchGroup.getAttribute("category");
+				ImageDescriptor image = launchGroupExtension.getImageDescriptor();
+				String label = launchGroup.getAttribute("label");
+				String catlabel="";
+				if(category!=null) {
+					catlabel=" "+label;
+				}
+				label = String.format("Open %1$s %2$s configurations ...", catlabel, launchGroupExtension.getMode());
+				showLaunchOtherConfigurationActions.add(builder.createShowLaunchOtherConfigurationDialogAction(
+						launchGroupExtension, label, label, image
+				));
+			}
+		}
 	}
 
 	private void setupActionBuilder() {
@@ -393,7 +435,8 @@ public class RunnerView extends ViewPart
 			manager.add(new Separator());
 			for(ShowLaunchOtherConfigurationsDialogAction showLaunchOtherConfigurationAction : showLaunchOtherConfigurationActions) {
 				String mode = showLaunchOtherConfigurationAction.getMode();
-				if(launchNode.supportsMode(mode)) {
+				String category = showLaunchOtherConfigurationAction.getCategory();
+				if(launchNode.supportsMode(mode, category)) {
 					manager.add(showLaunchOtherConfigurationAction);
 				}
 			}
@@ -421,7 +464,8 @@ public class RunnerView extends ViewPart
 		if (launchNode != null) {
 			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
 				String mode = otherLaunchAction.getMode();
-				if(launchNode.supportsMode(mode)) {
+				String category = otherLaunchAction.getCategory();
+				if(launchNode.supportsMode(mode, category)) {
 					manager.add(otherLaunchAction);
 					otherLaunchAction.setChecked(mode.equals(launchNode.getDefaultMode()));
 				}

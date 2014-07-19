@@ -85,8 +85,8 @@ public final class LaunchActionBuilder {
 		return this;
 	}
 
-	public Action createShowLaunchOtherConfigurationDialogAction(LaunchGroupExtension launchGroupExtension, String title, String tooltip, ImageDescriptor image) {
-		return decorate(new ShowLaunchOtherConfigurationsDialogAction(nodeSelection, launchGroupExtension))
+	public ShowLaunchOtherConfigurationsDialogAction createShowLaunchOtherConfigurationDialogAction(LaunchGroupExtension launchGroupExtension, String title, String tooltip, ImageDescriptor image) {
+		return (ShowLaunchOtherConfigurationsDialogAction)decorate(new ShowLaunchOtherConfigurationsDialogAction(nodeSelection, launchGroupExtension))
 			.withTitle(title)
 			.withTooltip(tooltip)
 			.withImageDescriptor(image)
@@ -101,8 +101,8 @@ public final class LaunchActionBuilder {
 			.andReleaseAction();
 	}
 
-	public Action createLaunchOtherConfigurationAction(String mode, String title, String tooltip, ImageDescriptor image) {
-		return decorate(new LaunchOtherConfigurationAction(nodeSelection, mode))
+	public LaunchOtherConfigurationAction createLaunchOtherConfigurationAction(String mode, String category, String title, String tooltip, ImageDescriptor image) {
+		return (LaunchOtherConfigurationAction)decorate(new LaunchOtherConfigurationAction(nodeSelection, mode, category))
 			.withTitle(title)
 			.withTooltip(tooltip)
 			.withImageDescriptor(image)

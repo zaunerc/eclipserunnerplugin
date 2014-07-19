@@ -12,13 +12,18 @@ public class LaunchOtherConfigurationAction extends BaseRunnerAction {
 
 	private INodeSelection selection;
 	private String mode;
+	private String category;
 
-	public LaunchOtherConfigurationAction(INodeSelection selection, String mode) {
+	public LaunchOtherConfigurationAction(INodeSelection selection, String mode, String category) {
 		this.selection = selection;
 		this.mode = mode;
+		this.category = category;
 	}
 	public String getMode() {
 		return mode;
+	}
+	public String getCategory() {
+		return category;
 	}
 	@Override
 	public void run() {
