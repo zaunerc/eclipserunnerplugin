@@ -6,10 +6,10 @@ import static com.eclipserunner.Messages.Message_bookmark;
 import static com.eclipserunner.Messages.Message_bookmarkTooltip;
 import static com.eclipserunner.Messages.Message_collapseAll;
 import static com.eclipserunner.Messages.Message_collapseAllTooltip;
-import static com.eclipserunner.Messages.Message_createToggleDefaultCategory;
-import static com.eclipserunner.Messages.Message_createToggleDefaultCategoryTooltip;
 import static com.eclipserunner.Messages.Message_createRunDefaultAction;
 import static com.eclipserunner.Messages.Message_createRunDefaultActionTooltip;
+import static com.eclipserunner.Messages.Message_createToggleDefaultCategory;
+import static com.eclipserunner.Messages.Message_createToggleDefaultCategoryTooltip;
 import static com.eclipserunner.Messages.Message_expandAll;
 import static com.eclipserunner.Messages.Message_expandAllTooltip;
 import static com.eclipserunner.Messages.Message_openItem;
@@ -37,7 +37,6 @@ import org.eclipse.debug.internal.ui.launchConfigurations.LaunchGroupExtension;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
@@ -49,7 +48,6 @@ import com.eclipserunner.model.INodeSelection;
 import com.eclipserunner.model.IRunnerModel;
 import com.eclipserunner.views.IRunnerView;
 import com.eclipserunner.views.TreeMode;
-import com.eclipserunner.views.impl.RunnerView;
 
 /**
  * Builder creates Actions related to test launching
