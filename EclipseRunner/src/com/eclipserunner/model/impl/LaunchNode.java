@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchManager;
@@ -38,7 +39,28 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 		this.launchConfiguration = launchConfiguration;
 	}
 
+	public boolean isExisting() {
+		try {
+			// if we cannot get the getIdentifier, the launch config is about to be deleted
+			// this is a bad hack, but otherwise, we get strange log messages.
+			// This statement may throw an CoreException! 
+			launchConfiguration.getType().getIdentifier();
+			return DebugPlugin.getDefault().getLaunchManager().isExistingLaunchConfigurationName(launchConfiguration.getName());
+		} catch (CoreException e) {
+			return false;
+		}
+	}
+
+
 	public ILaunchConfiguration getLaunchConfiguration() {
+		try {
+			if(!DebugPlugin.getDefault().getLaunchManager().isExistingLaunchConfigurationName(launchConfiguration.getName())) {
+				
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return launchConfiguration;
 	}
 
@@ -136,5 +158,4 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 			return true;
 		}
 	}
-
 }

@@ -22,6 +22,7 @@ import com.eclipserunner.model.IRunnerModel;
 public class LaunchTreeLabelProvider extends LabelProvider {
 
 	private static final String IMG_CATEGORY         = "category.gif";
+	private static final String IMG_RUN              = "run.gif";
 	private static final String IMG_DEFAULT_CATEGORY = "category-archive.gif";
 	private static final String IMG_DECORATION       = "star_min.gif";
 
@@ -50,14 +51,18 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 
 	@Override
 	public Image getImage(Object element) {
-		if (element instanceof ICategoryNode) {
-			return getCategoryImage((ICategoryNode) element);
-		}
-		else if (element instanceof ILaunchNode) {
-			return getLaunchConfigurationImage((ILaunchNode) element);
-		}
-		else if (element instanceof ILaunchTypeNode) {
-			return getLaunchConfigurationTypeImage((ILaunchTypeNode) element);
+		try {
+			if (element instanceof ICategoryNode) {
+				return getCategoryImage((ICategoryNode) element);
+			}
+			else if (element instanceof ILaunchNode) {
+				return getLaunchConfigurationImage((ILaunchNode) element);
+			}
+			else if (element instanceof ILaunchTypeNode) {
+				return getLaunchConfigurationTypeImage((ILaunchTypeNode) element);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		return RunnerPlugin.getDefault().getImage(ImageDescriptor.getMissingImageDescriptor());
 	}
@@ -71,7 +76,12 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 	}
 
 	private Image getLaunchConfigurationImage(ILaunchNode launchConfiguration) {
+		if(!launchConfiguration.isExisting()) {
+			// do not cause errors if the launch config does not exist
+			return createImage(IMG_RUN);
+		}
 		Image image = debugModelPresentation.getImage(launchConfiguration.getLaunchConfiguration());
+		launchConfiguration.isExisting();
 		if (launchConfiguration.isBookmarked()) {
 			return overlyBookmarkIcon(image, IMG_DECORATION);
 		}
