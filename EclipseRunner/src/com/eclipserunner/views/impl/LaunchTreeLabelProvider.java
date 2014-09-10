@@ -69,16 +69,16 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 
 	private Image getCategoryImage(ICategoryNode launchConfigurationCategory) {
 		if (runnerModel.getDefaultCategoryNode() == launchConfigurationCategory) {
-			return createImage(IMG_DEFAULT_CATEGORY);
+			return getImage(IMG_DEFAULT_CATEGORY);
 		} else {
-			return createImage(IMG_CATEGORY);
+			return getImage(IMG_CATEGORY);
 		}
 	}
 
 	private Image getLaunchConfigurationImage(ILaunchNode launchConfiguration) {
 		if(!launchConfiguration.isExisting()) {
 			// do not cause errors if the launch config does not exist
-			return createImage(IMG_RUN);
+			return getImage(IMG_RUN);
 		}
 		Image image = debugModelPresentation.getImage(launchConfiguration.getLaunchConfiguration());
 		launchConfiguration.isExisting();
@@ -92,7 +92,7 @@ public class LaunchTreeLabelProvider extends LabelProvider {
 		return debugModelPresentation.getImage(typeNode.getLaunchConfigurationType());
 	}
 	
-	private Image createImage(String imageName) {
+	private Image getImage(String imageName) {
 		return RunnerPlugin.getDefault().getImage(imageName);
 	}
 
