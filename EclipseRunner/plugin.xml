@@ -14,5 +14,13 @@
                relationship="right" id="com.eclipserunner.views.RunnerView" />
 		</perspectiveExtension>
 	</extension>
+   <extension
+         name="Eclipse Runner"
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/Eclipse Runner-toc.xml"
+            primary="true">
+      </toc>
+   </extension>
 	
 </plugin>

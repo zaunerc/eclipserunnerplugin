@@ -7,7 +7,8 @@ Bundle-Activator: com.eclipserunner.RunnerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide;bundle-version="3.6.2",
  org.eclipse.core.runtime,
- org.eclipse.debug.ui;bundle-version="3.5.1"
+ org.eclipse.debug.ui;bundle-version="3.5.1",
+ org.eclipse.help
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.eclipserunner,
