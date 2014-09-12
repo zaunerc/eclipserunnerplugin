@@ -1,6 +1,8 @@
 Eclipse Runner Plugin
 ===================
 
+**Note**: this is a fork of [EclipeRunner](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
+
 Overview
 --------
 
@@ -30,20 +32,39 @@ Features
 History
 -------
 
-18-07-2014 Version 1.3.1 released Rework
+### 12-09-2014 Version 1.3.2 minor bug fixes
+- removed warnings on stdout
+- removed "Filter active working set", because it had no effect
+- fixed persistence of collapse/expand all
 
-23-03-2014 Version 1.3.0.1 released Support for other launch types
+### 18-07-2014 Version 1.3.1 released with lots of bug fixes and usability improvements
 
-22-10-2011 Version 1.3.0 released. See changelog for more info.
 
-27-05-2011 Version 1.2.0 released. See change log for more info.
+- dynamically use the launch image form the launch configuration
+- made node expansions persistent 
+- do not close all nodes when a launch configurations change
+- added a drop-down for the launching in the view tool bar
+- check mark the default launch configuration in context menu (the one called on double click)
+- show only supported launch configurations in context menu
+- remember the last launch type per configuration
+- removed dependencies to JDT
+- fixed [resource leak](https://code.google.com/p/eclipserunnerplugin/issues/detail?id=12)
 
-16-05-2011 Eclipse runner supports installation via Marketplace in Eclipse >3.5
 
-15-05-2011 Version 1.1.0 released. See change log for more info.
+### Older releases
 
-29-03-2010 First stable version 1.0.0 released. See Installation notes.
+- **23-03-2014 Version 1.3.0.1** released Support for other launch types
 
-29-03-2010 New screenshots released here.
+- **22-10-2011 Version 1.3.0** released. See [change log](https://code.google.com/p/eclipserunnerplugin/wiki/Changelog) for more info.
 
-21-03-2010 we're about to release the first version of Eclipse Runner Plugin. Estimated release date 05-04-2010
+- **27-05-2011 Version 1.2.0** released. [change log](https://code.google.com/p/eclipserunnerplugin/wiki/Changelog) log for more info.
+
+- **16-05-2011** Eclipse runner supports installation via Marketplace in Eclipse >3.5
+
+- **15-05-2011 Version 1.1.0** released. See change log for more info.
+
+- **29-03-2010** First stable version 1.0.0 released. See Installation notes.
+
+- **29-03-2010** New screenshots released here.
+
+- **21-03-2010** we're about to release the first version of Eclipse Runner Plugin. Estimated release date 05-04-2010
