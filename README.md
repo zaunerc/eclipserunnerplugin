@@ -1,7 +1,7 @@
 Eclipse Runner Plugin
 ===================
 
-**Note**: this is a fork of [EclipeRunner](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
+**Note**: this is a fork of [Eclipse Runner Plugin](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
 
 Overview
 --------
