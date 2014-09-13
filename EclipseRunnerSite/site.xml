@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/EclipseRunnerFeature_1.3.2.201409131920.jar" id="EclipseRunnerFeature" version="1.3.2.201409131920">
+   <feature url="features/EclipseRunnerFeature_1.3.2.201409131928.jar" id="EclipseRunnerFeature" version="1.3.2.201409131928">
       <category name="EclipseRunner"/>
    </feature>
    <category-def name="EclipseRunner" label="EclipseRunner"/>
