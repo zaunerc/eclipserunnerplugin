@@ -41,11 +41,11 @@ public class LaunchNode implements ILaunchNode, IActionEnablement {
 
 	public boolean isExisting() {
 		try {
-			// if we cannot get the getIdentifier, the launch config is about to be deleted
+			// if we cannot get the getType, the launch config is about to be deleted
 			// this is a bad hack, but otherwise, we get strange log messages.
 			// This statement may throw an CoreException! 
-			launchConfiguration.getType().getIdentifier();
-			return DebugPlugin.getDefault().getLaunchManager().isExistingLaunchConfigurationName(launchConfiguration.getName());
+			launchConfiguration.getType();
+			return true;
 		} catch (CoreException e) {
 			return false;
 		}
