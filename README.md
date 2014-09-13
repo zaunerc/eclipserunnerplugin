@@ -16,9 +16,6 @@ User gets a new "Runner" view, which allows to categorize and bookmark launch co
 in groups, run them directly from the view by double clicking on the launch configuration icon. 
 It speeds up development in projects containing many small java applications or many test suits.
 
-
-Features
----------
 Features
 ---------
  - browse your launch configurations in separate Eclipse Runner view
