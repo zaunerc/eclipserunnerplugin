@@ -2,6 +2,10 @@
 <toc topic="help/Eclipse Runner.html" label="Eclipse Runner">
 	<topic href="help/Eclipse Runner.html" label="Eclipse Runner">
 		<topic href="help/Eclipse Runner.html#Overview" label="Overview"></topic>
-		<topic href="help/Eclipse Runner.html#Features" label="Features"></topic>
+		<topic href="help/Eclipse Runner.html#Features" label="Features">
+			<topic href="help/Eclipse Runner.html#Keepyourlaunchesorganized" label="Keep your launches organized"></topic>
+			<topic href="help/Eclipse Runner.html#Runordebuglaunchconfigurationdirectlyfromtheviewbydoubleclickingonit" label="Run or debug launch configuration directly from the view by double clicking on it"></topic>
+			<topic href="help/Eclipse Runner.html#Filterlaunchconfigurationsusingfollowingfilters" label="Filter launch configurations using following filters"></topic>
+		</topic>
 	</topic>
 </toc>

@@ -1,7 +1,9 @@
 Eclipse Runner
 ==============
 
-**Note**: this is a fork of [Eclipse Runner Plugin](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
+The home-page of this plugin is [github.com/scharf/eclipserunnerplugin](https://github.com/scharf/eclipserunnerplugin).
+
+**Note**: this is a fork of [code.google.com/p/eclipserunnerplugin/](https://code.google.com/p/eclipserunnerplugin/) with a bug fixes and enhancements.
 
 Overview
 --------
@@ -14,16 +16,33 @@ It speeds up development in projects containing many small java applications or 
 
 Features
 ---------
- - browse your launch configurations in separate Eclipse Runner view
- - run or debug launch configuration directly from the view by double clicking on it
- - categorize your launch configurations in custom groups
- - bookmark featured launch configurations with a star icon
- - filter launch configurations using following filters
-   - closed projects
-   - deleted projects
-   - uncategorized launch configurations
-   - current project
-   - current working set
-   - bookmarked launch configurations
- - decide if you want to run or debug
- - open resource behind launch configuration in editor (f.e. Java main class)
+
+### Keep your launches organized  
+- categorize your launch configurations in custom groups
+- browse your launch configurations in separate Eclipse Runner view
+- open resource behind launch configuration in editor (f.e. Java main class)
+
+![OrganizeBrCategory.jpg](OrganizeBrCategory.jpg)
+ 
+### Run or debug launch configuration directly from the view by double clicking on it
+- remembers last launch mode (run, debug, profile...)
+- less clicks if you have to run more than one launc configuration
+
+![LastLauchMode.png](LastLauchMode.png)
+
+   
+### Filter launch configurations using following filters
+- closed projects
+- deleted projects
+- uncategorized launch configurations
+- current project
+- bookmarked launch configurations
+
+![FilterBookmarks.png](FilterBookmarks.png)
+
+ 
+ 
+ 
+
+ 
+  
