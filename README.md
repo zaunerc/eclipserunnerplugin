@@ -3,6 +3,8 @@ Eclipse Runner Plugin
 
 **Note**: this is a fork of [Eclipse Runner Plugin](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
 
+To install, use this update site: [https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/](https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/)
+
 Overview
 --------
 

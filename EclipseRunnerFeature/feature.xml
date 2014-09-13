@@ -3,8 +3,7 @@
       id="EclipseRunnerFeature"
       label="EclipseRunnerFeature"
       version="1.3.2.qualifier"
-      provider-name="EclipseRunner"
-      nl="en">
+      provider-name="EclipseRunner">
 
    <license url="http://opensource.org/licenses/mit-license.php">
       The MIT License (MIT)
@@ -34,13 +33,6 @@ SOFTWARE.
       <update label="Eclipse Runner Scharf Fork" url="https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/"/>
       <discovery label="Eclipse Runner Plugin Homepage" url="https://github.com/scharf/eclipserunnerplugin"/>
    </url>
-
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.ide" version="3.6.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.debug.ui" version="3.5.1" match="greaterOrEqual"/>
-   </requires>
 
    <plugin
          id="EclipseRunner"
