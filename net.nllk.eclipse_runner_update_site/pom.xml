@@ -8,9 +8,9 @@
   
   <parent>
     <groupId>net.nllk</groupId>
-    <artifactId>eclipserunnerplugin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../</relativePath>
+    <artifactId>net.nllk.eclipse_runner_parent</artifactId>
+	<version>1.3.2-SNAPSHOT</version>
+	<relativePath>../net.nllk.eclipse_runner_parent/pom.xml</relativePath>
   </parent>
 
 </project>

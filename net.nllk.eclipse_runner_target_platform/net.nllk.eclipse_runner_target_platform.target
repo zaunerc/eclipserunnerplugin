@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
 
-<target name="net.nllk.eclipse-runner-target-platform">
+<target name="net.nllk.eclipse_runner_target_platform">
 
 	<locations>
 

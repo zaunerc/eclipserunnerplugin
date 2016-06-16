@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/net.nllk.eclipse_runner_feature_1.3.2.qualifier.jar" id="net.nllk.eclipse_runner_feature" version="1.3.2.qualifier">
-      <category name="new_category_1"/>
+      <category name="net.nllk.eclipse_runner_category"/>
    </feature>
-   <category-def name="new_category_1" label="New Category 1"/>
+   <category-def name="net.nllk.eclipse_runner_category" label="Eclipse Runner"/>
 </site>
