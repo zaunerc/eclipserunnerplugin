@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.nllk</groupId>
+  <artifactId>eclipserunnerplugin</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+	<properties>
+		<!-- See http://mvnrepository.com/artifact/org.eclipse.tycho/tycho-maven-plugin/ 
+			for latest version. -->
+		<tycho-version>0.25.0</tycho-version>
+	</properties>
+
+  <modules>
+    <module>net.nllk.eclipse-runner-target-platform</module>
+    <module>EclipseRunner</module>
+    <module>EclipseRunnerFeature</module>
+    <module>EclipseRunnerSite</module>
+   
+  </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>net.nllk</groupId>
+							<!-- This plugin expects exactly one file (<artifactId>.target) in 
+								the project's base directory. -->
+							<artifactId>net.nllk.eclipse-runner-target-platform</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</artifact>
+					</target>
+				</configuration>
+			</plugin>
+      
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+
+<target name="net.nllk.eclipse-runner-target-platform">
+
+	<locations>
+
+		<!-- ECLIPSE RELEASES REPO -->
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="http://download.eclipse.org/releases/mars"/>
+			<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
+		</location>
+
+	</locations>
+
+</target>
