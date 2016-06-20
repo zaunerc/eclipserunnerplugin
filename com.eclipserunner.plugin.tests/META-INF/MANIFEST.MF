@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Eclipse Runner Plugin Unit Tests
 Bundle-SymbolicName: com.eclipserunner.plugin.tests
 Bundle-Version: 1.3.2.qualifier
-Fragment-Host: com.eclipserunner.plugin;bundle-version="1.3.2.qualifier"
+Fragment-Host: com.eclipserunner.plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Require-Bundle: org.junit,
