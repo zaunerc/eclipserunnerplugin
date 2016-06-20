@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>com.eclipserunner</groupId>
-  <artifactId>com.eclipserunner.parent</artifactId>
-  <version>1.3.2-SNAPSHOT</version>
-  
-  <packaging>pom</packaging>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.eclipserunner</groupId>
+	<artifactId>com.eclipserunner.parent</artifactId>
+	<version>1.3.2-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
 
 	<properties>
 		<!-- See http://mvnrepository.com/artifact/org.eclipse.tycho/tycho-maven-plugin/ 
@@ -15,23 +16,23 @@
 		<tycho-version>0.25.0</tycho-version>
 	</properties>
 
-  <modules>
-    <module>../com.eclipserunner.target_platform</module>
-    <module>../com.eclipserunner.plugin.tests</module>
-    <module>../com.eclipserunner.plugin</module>
-    <module>../com.eclipserunner.feature</module>
-    <module>../com.eclipserunner.update_site</module>
-  </modules>
+	<modules>
+		<module>../com.eclipserunner.target_platform</module>
+		<module>../com.eclipserunner.plugin.tests</module>
+		<module>../com.eclipserunner.plugin</module>
+		<module>../com.eclipserunner.feature</module>
+		<module>../com.eclipserunner.update_site</module>
+	</modules>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
-      </plugin>
-      
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -48,7 +49,7 @@
 					</target>
 				</configuration>
 			</plugin>
-      
-    </plugins>
-  </build>
+
+		</plugins>
+	</build>
 </project>
