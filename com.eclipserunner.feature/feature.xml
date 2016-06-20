@@ -2,13 +2,32 @@
 <feature
       id="com.eclipserunner.feature"
       label="Eclipse Runner Feature"
-      version="1.3.2.qualifier"
+      version="1.3.3"
       provider-name="Eclipse Runner Team">
+
+   <description>
+      The Eclipse Runner plugin improves the way how one can execute
+launch configurations from inside the Eclipse IDE. The plugin
+adds a new &quot;Runner&quot; view, which allows the user to categorize,
+bookmark and organize launch configurations in groups. Launch
+configurations can be executed directly from the view by double
+clicking on the icon of the launch configuration.
+
+- Eclipse Runner @ Github:
+  https://github.com/zaunerc/eclipserunnerplugin
+
+- Eclipse Runner @ Eclipse Marketplace:
+  https://marketplace.eclipse.org/content/eclipse-runner
+
+- Eclipse Runner P2 update site (always serving latest version):
+  https://dl.bintray.com/zaunerc/p2/eclipserunner/latest
+   </description>
 
    <license url="http://opensource.org/licenses/mit-license.php">
       The MIT License (MIT)
 
-Copyright (c) 2010-2014 Lukasz Wachowicz, Bartosz Roznowski, Tony Wang, Michael Scharf   
+Copyright (c) 2010-2016
+Lukasz Wachowicz, Bartosz Roznowski, Tony Wang, Michael Scharf, Christoph Zauner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the &quot;Software&quot;), to deal
@@ -30,8 +49,7 @@ SOFTWARE.
    </license>
 
    <url>
-      <update url="https://dl.bintray.com/zaunerc/p2/eclipserunner/"/>
-      <discovery label="Eclipse Runner Plugin Homepage" url="https://github.com/scharf/eclipserunnerplugin"/>
+      <update url="https://dl.bintray.com/zaunerc/p2/eclipserunner/latest/"/>
    </url>
 
    <plugin

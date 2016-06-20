@@ -1,12 +1,11 @@
 Eclipse Runner Plugin
 ===================
 
-**Note**: this is a fork of [Eclipse Runner Plugin](https://code.google.com/p/eclipserunnerplugin/) with a few bug fixes and enhancements.
-
 Install
 -------
 
-To install, use this **update site**: [https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/](https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/)
+To install, use [this update site](https://bintray.com/zaunerc/p2/eclipserunner/latest).
+On the Eclipse marketplace this plugin can be found [here](https://marketplace.eclipse.org/content/eclipse-runner).
 
 Overview
 --------
@@ -18,6 +17,7 @@ It speeds up development in projects containing many small java applications or 
 
 Features
 ---------
+
  - browse your launch configurations in separate Eclipse Runner view
  - keep your launches organized   
  - run or debug launch configuration directly from the view by double clicking on it
@@ -35,8 +35,35 @@ Features
 
 For more information see [Help Files](EclipseRunner/help/Eclipse Runner.md).
 
+Release
+--------
+
+1. Change working directory to parent project: `$ cd com.eclipserunner.parent`
+
+1. Create a build and run unit tests: `$ mvn clean install`. **Only if everything succeeds proceed with the following steps.** Otherwise fix the build errors and/or unit tests first instead. 
+
+1. Set new version numer: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.3"`
+
+1. Create a new commit: `$ git commit -a -m "Creating release v1.3.3."`
+
+1. Tag the commit: `$ git tag v1.3.3`
+
+1. Build project: `$ mvn clean install`
+
+1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/eclipserunner/latest`.
+
+1. Start the next development iteration: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.4.qualifier"`
+
+1. Create a new commit: `$ git commit -a ../ -m "Creating v1.3.4 snapshot build."`
+
 History
 -------
+
+### 2016-06-21 Version 1.3.3 build system improvements
+
+- Introduce Maven Tycho build system: Headless builds are now supported. See e.g. [Travis CI](https://travis-ci.org/zaunerc/eclipserunnerplugin).
+- Move unit tests to their own fragment: Unit tests are now run automatically as part of the build process using the Tycho Surefire Plugin.
+- P2 update site is now automatically generated: See `com.eclipserunner.update_site` project.
 
 ### 2014-09-13 Version 1.3.2 minor bug fixes
 
@@ -56,7 +83,6 @@ History
 - remember the last launch type per configuration
 - removed dependencies to JDT
 - fixed [resource leak](https://code.google.com/p/eclipserunnerplugin/issues/detail?id=12)
-
 
 ### Older releases
 
