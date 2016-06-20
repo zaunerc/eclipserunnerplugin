@@ -30,7 +30,7 @@ SOFTWARE.
    </license>
 
    <url>
-      <update label="Eclipse Runner Scharf Fork" url="https://raw.githubusercontent.com/scharf/eclipserunnerplugin/master/EclipseRunnerSite/"/>
+      <update url="https://dl.bintray.com/zaunerc/p2/eclipserunner/"/>
       <discovery label="Eclipse Runner Plugin Homepage" url="https://github.com/scharf/eclipserunnerplugin"/>
    </url>
 
