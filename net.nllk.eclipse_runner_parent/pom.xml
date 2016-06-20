@@ -17,6 +17,7 @@
 
   <modules>
     <module>../net.nllk.eclipse_runner_target_platform</module>
+    <module>../net.nllk.eclipse_runner_test</module>
     <module>../net.nllk.eclipse_runner_plugin</module>
     <module>../net.nllk.eclipse_runner_feature</module>
     <module>../net.nllk.eclipse_runner_update_site</module>

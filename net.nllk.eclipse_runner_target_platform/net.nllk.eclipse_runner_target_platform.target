@@ -9,7 +9,31 @@
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="http://download.eclipse.org/releases/mars"/>
 			<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
+			<!-- Required because the product includes native launcher artifacts. -->
+			<unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
 		</location>
+
+		<!-- ECLIPSE ORBIT REPO -->
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
+			<unit id="org.junit" version="0.0.0"/>
+			<unit id="org.junit.source" version="0.0.0"/>
+		</location>
+
+		<!--
+			CUSTOM MOCKITO REPO
+
+			Using mockito from the Orbit repo does not work. Last tried using
+			repos R20160221192158 (mars.2+) and R20160520211859 (neon).
+			Always verify that running the tests in Eclipse and Maven works both.
+
+			The bundles were directly taken from the upstream projects.
+		-->
+	    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+	      <repository location="https://dl.bintray.com/zaunerc/p2/mockito/1.0.0/"/>
+	      <unit id="org.mockito.mockito-core" version="0.0.0"/>
+	      <unit id="org.objenesis" version="0.0.0"/>
+	    </location>
 
 	</locations>
 
