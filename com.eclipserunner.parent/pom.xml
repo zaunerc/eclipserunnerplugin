@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>net.nllk</groupId>
-  <artifactId>net.nllk.eclipse_runner_parent</artifactId>
+  <groupId>com.eclipserunner</groupId>
+  <artifactId>com.eclipserunner.parent</artifactId>
   <version>1.3.2-SNAPSHOT</version>
   
   <packaging>pom</packaging>
@@ -16,11 +16,11 @@
 	</properties>
 
   <modules>
-    <module>../net.nllk.eclipse_runner_target_platform</module>
-    <module>../net.nllk.eclipse_runner_test</module>
-    <module>../net.nllk.eclipse_runner_plugin</module>
-    <module>../net.nllk.eclipse_runner_feature</module>
-    <module>../net.nllk.eclipse_runner_update_site</module>
+    <module>../com.eclipserunner.target_platform</module>
+    <module>../com.eclipserunner.plugin.tests</module>
+    <module>../com.eclipserunner.plugin</module>
+    <module>../com.eclipserunner.feature</module>
+    <module>../com.eclipserunner.update_site</module>
   </modules>
 
   <build>
@@ -39,10 +39,10 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>net.nllk</groupId>
+							<groupId>com.eclipserunner</groupId>
 							<!-- This plugin expects exactly one file (<artifactId>.target) in 
 								the project's base directory. -->
-							<artifactId>net.nllk.eclipse_runner_target_platform</artifactId>
+							<artifactId>com.eclipserunner.target_platform</artifactId>
 							<version>1.3.2-SNAPSHOT</version>
 						</artifact>
 					</target>

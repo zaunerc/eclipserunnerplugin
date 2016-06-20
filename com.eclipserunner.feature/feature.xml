@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="net.nllk.eclipse_runner_feature"
+      id="com.eclipserunner.feature"
       label="Eclipse Runner Feature"
       version="1.3.2.qualifier"
       provider-name="Eclipse Runner Team">
@@ -35,7 +35,7 @@ SOFTWARE.
    </url>
 
    <plugin
-         id="net.nllk.eclipse_runner_plugin"
+         id="com.eclipserunner.plugin"
          download-size="0"
          install-size="0"
          version="0.0.0"

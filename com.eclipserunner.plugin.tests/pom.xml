@@ -5,14 +5,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>net.nllk.eclipse_runner_test</artifactId>
+	<artifactId>com.eclipserunner.plugin.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<parent>
-		<groupId>net.nllk</groupId>
-		<artifactId>net.nllk.eclipse_runner_parent</artifactId>
+		<groupId>com.eclipserunner</groupId>
+		<artifactId>com.eclipserunner.parent</artifactId>
 		<version>1.3.2-SNAPSHOT</version>
-		<relativePath>../net.nllk.eclipse_runner_parent/pom.xml</relativePath>
+		<relativePath>../com.eclipserunner.parent/pom.xml</relativePath>
 	</parent>
 
 </project>
