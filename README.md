@@ -54,7 +54,7 @@ Release
 
 1. Start the next development iteration: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.4.qualifier"`
 
-1. Create a new commit: `$ git commit -a ../ -m "Creating v1.3.4 snapshot build."`
+1. Create a new commit: `$ git commit -a -m "Creating v1.3.4 snapshot build."`
 
 History
 -------

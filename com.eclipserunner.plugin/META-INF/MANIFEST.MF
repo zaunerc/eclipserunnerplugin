@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Eclipse Runner Plugin
 Bundle-SymbolicName: com.eclipserunner.plugin;singleton:=true
-Bundle-Version: 1.3.3
+Bundle-Version: 1.3.4.qualifier
 Bundle-Activator: com.eclipserunner.RunnerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide;bundle-version="3.6.2",

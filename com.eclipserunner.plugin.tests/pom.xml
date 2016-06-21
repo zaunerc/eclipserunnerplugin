@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>com.eclipserunner</groupId>
 		<artifactId>com.eclipserunner.parent</artifactId>
-		<version>1.3.3</version>
+		<version>1.3.4-SNAPSHOT</version>
 		<relativePath>../com.eclipserunner.parent/pom.xml</relativePath>
 	</parent>
 

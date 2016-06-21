@@ -2,7 +2,7 @@
 <feature
       id="com.eclipserunner.feature"
       label="Eclipse Runner Feature"
-      version="1.3.3"
+      version="1.3.4.qualifier"
       provider-name="Eclipse Runner Team">
 
    <description>
