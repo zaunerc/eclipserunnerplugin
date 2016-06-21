@@ -15,4 +15,20 @@
 		<relativePath>../com.eclipserunner.parent/pom.xml</relativePath>
 	</parent>
 
+	<build>
+		<plugins>
+	
+			<plugin>
+			   <groupId>org.eclipse.tycho</groupId>
+			   <artifactId>tycho-surefire-plugin</artifactId>
+			   <version>${tycho-version}</version>
+			   
+			   <configuration>
+			      <appArgLine>-debug -consoleLog</appArgLine>
+			   </configuration>
+			</plugin>	
+	
+		</plugins>
+	</build>
+
 </project>
