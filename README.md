@@ -1,4 +1,4 @@
-Eclipse Runner Plugin
+Eclipse Runner Plugin [![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin)
 ===================
 
 Install
