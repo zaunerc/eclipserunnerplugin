@@ -4,7 +4,7 @@ Eclipse Runner Plugin [![Build Status](https://travis-ci.org/zaunerc/eclipserunn
 Install
 -------
 
-To install, use [this update site](https://bintray.com/zaunerc/p2/eclipserunner/latest).
+To install, use [this update site](https://dl.bintray.com/zaunerc/p2/eclipserunner/latest/).
 On the Eclipse marketplace this plugin can be found [here](https://marketplace.eclipse.org/content/eclipse-runner).
 
 Overview
