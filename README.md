@@ -48,6 +48,8 @@ Release
 
 1. Tag the commit: `$ git tag v1.3.3`
 
+1. Push the tag to origin: `$ git push origin v1.3.3`
+
 1. Build project: `$ mvn clean install`
 
 1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/eclipserunner/latest`.
