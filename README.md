@@ -50,8 +50,6 @@ Release
 
 1. Tag the commit: `$ git tag v1.3.3`
 
-1. Push the tag to origin: `$ git push origin v1.3.3`
-
 1. Build project: `$ mvn clean install`
 
 1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest`.
@@ -62,8 +60,16 @@ Release
 
 1. Create a new commit: `$ git commit -a -m "Creating v1.3.4 snapshot build."`
 
+1. Push the tag to origin: `$ git push origin v1.3.3`
+
+1. Finally merge / push any pending commits to origin/master on GitHub.
+
 History
 -------
+
+### 2016-06-23 Version 1.3.4 build system improvements
+
+- Fix automatic builds on [Travis CI](https://travis-ci.org/zaunerc/eclipserunnerplugin).
 
 ### 2016-06-21 Version 1.3.3 build system improvements
 
