@@ -1,10 +1,11 @@
-Eclipse Runner Plugin [![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin)
+Eclipse Runner Plugin
+[![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin) [![Download](https://api.bintray.com/packages/zaunerc/p2/com.eclipserunner.p2_site/images/download.svg) ](https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest/)
 ===================
 
-Install
+Installation
 -------
 
-To install, use [this update site](https://dl.bintray.com/zaunerc/p2/eclipserunner/latest/).
+To install this plugin in Eclipse use [this update site](https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest/).
 On the Eclipse marketplace this plugin can be found [here](https://marketplace.eclipse.org/content/eclipse-runner).
 
 Overview
