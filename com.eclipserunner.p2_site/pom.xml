@@ -3,13 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-  <artifactId>com.eclipserunner.update_site</artifactId>
+  <artifactId>com.eclipserunner.p2_site</artifactId>
   <packaging>eclipse-repository</packaging>
   
   <parent>
     <groupId>com.eclipserunner</groupId>
     <artifactId>com.eclipserunner.parent</artifactId>
-	<version>1.3.4-SNAPSHOT</version>
+	<version>1.3.4</version>
 	<relativePath>../com.eclipserunner.parent/pom.xml</relativePath>
   </parent>
 
