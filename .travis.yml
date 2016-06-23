@@ -5,6 +5,8 @@ jdk:
 before_script:
   - cd com.eclipserunner.parent/
 
+script: "mvn verify -B"
+
 addons:
     code_climate:
         repo_token: c87b3fb57965122d955c833c7fbeb5e82da4f7c20fbdf491d4524a89aa7e5d6e
