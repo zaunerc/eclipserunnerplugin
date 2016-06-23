@@ -40,7 +40,7 @@ Release
 
 1. Change working directory to parent project: `$ cd com.eclipserunner.parent`
 
-1. Create a build and run unit tests: `$ mvn clean install`. **Only if everything succeeds proceed with the following steps.** Otherwise fix the build errors and/or unit tests first instead. 
+1. Build sources and run tests (using tycho-surefire-plugin): `$ mvn clean verify`. **Only if everything succeeds proceed with the following steps.** Otherwise fix the build errors and/or unit tests first instead. 
 
 1. Set new version numer: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.3"`
 
@@ -54,7 +54,7 @@ Release
 
 1. Build project: `$ mvn clean install`
 
-1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/eclipserunner/latest`.
+1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest`.
 
 1. Start the next development iteration: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.4.qualifier"`
 
