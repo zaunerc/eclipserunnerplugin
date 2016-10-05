@@ -1,6 +1,8 @@
 Eclipse Runner Plugin [![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin) [![Download](https://api.bintray.com/packages/zaunerc/p2/com.eclipserunner.p2_site/images/download.svg) ](https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest/)
 ===================
 
+[![Join the chat at https://gitter.im/eclipserunnerplugin/Lobby](https://badges.gitter.im/eclipserunnerplugin/Lobby.svg)](https://gitter.im/eclipserunnerplugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Installation
 -------
 
