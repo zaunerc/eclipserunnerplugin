@@ -18,7 +18,9 @@ import org.eclipse.debug.core.ILaunchConfigurationListener;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.internal.ui.launchConfigurations.LaunchGroupExtension;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -462,12 +464,25 @@ public class RunnerView extends ViewPart
 
 	private void setupRunMenu(IMenuManager manager, ILaunchNode launchNode) {
 		if (launchNode != null) {
+			boolean anyActionEnabled = false;
 			for(LaunchOtherConfigurationAction otherLaunchAction : launchOtherConfigurationActions) {
 				String mode = otherLaunchAction.getMode();
 				String category = otherLaunchAction.getCategory();
 				if(launchNode.supportsMode(mode, category)) {
 					manager.add(otherLaunchAction);
-					otherLaunchAction.setChecked(mode.equals(launchNode.getDefaultMode()));
+					boolean enable = mode.equals(launchNode.getDefaultMode());
+					otherLaunchAction.setChecked(enable);
+					anyActionEnabled |= enable;
+				}
+			}
+
+			if (!anyActionEnabled) {
+				// No available mode was the nodes default mode. Enable the first mode instead.
+				for (IContributionItem item : manager.getItems()) {
+					if (item instanceof ActionContributionItem) {
+						((ActionContributionItem)item).getAction().setChecked(true);
+						break;
+					}
 				}
 			}
 		}
