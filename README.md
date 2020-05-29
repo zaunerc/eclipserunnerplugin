@@ -66,6 +66,65 @@ Release
 
 1. Finally merge / push any pending commits to origin/master on GitHub.
 
+IDE setup
+--------
+
+1. Make sure that at least [Maven](https://maven.apache.org/) version 3.6.3 is installed.
+
+2. Make sure that at least [JDK](https://openjdk.java.net/) version 13 ist installed.
+
+3. Create the following folder layout:
+
+```
+eclipserunnerplugin/
+    eclipse/
+    eclipse_workspace/
+    git/
+    runtime_eclipse_conf_area/
+    runtime_eclipse_workspace/
+```
+
+4. Install the Eclipse IDE for RCP and RAP Developers into the `eclipserunnerplugin/eclipse/`
+   folder. When using the [Eclipse Installer](https://www.eclipse.org/downloads/packages/)
+   in simple mode just select the "Eclipse IDE for RCP and RAP Developers" package and
+   set the `eclipserunnerplugin/` folder as the target folder. The IDE will be installed into an
+   `eclipse` subfolder.
+ 
+5. Change into the `eclipserunnerplugin/git/` foler and checkout the source code of the plugin
+   using the following command: `$ git clone https://github.com/zaunerc/eclipserunnerplugin.git`
+
+6. Verify that the Maven Tycho build is working by changing into the folder
+   `eclipserunnerplugin/git/eclipserunnerplugin/com.eclipserunner.parent`
+   and executing the command `$ mvn clean verify`.
+
+7. Start the Eclipse IDE (set `eclipserunnerplugin/workspace/` as the workspace folder).
+
+8. As soon as the Eclipse IDE is running: `File` -> `Import projects -> Existing Projetcs into Workspace`.
+   Set `eclipserunnerplugin/git/eclipserunnerplugin` as the root directory and finish the import
+   (only import the com.eclipserunner.* projects).
+
+9. `Window` -> `Preferences` -> `Plug-in Development` -> `Target Platform` and select `com.eclipserunner.target_platform`.
+
+Debug the plugin
+--------
+
+To debug the plugin you can start a new Eclipse instance (sometimes
+called "Runtime Eclipse") from your running Eclipse IDE instance (sometimes called
+"Development Eclipse").
+
+In order to do so right-click on the `com.eclipserunner.plugin` project ->
+`Debug As` -> `Eclipse Application`. Configure the launch configuration as follows:
+
+1. Set the location of the workspace data to `${workspace_loc}/../workspace_runtime_eclipse/`.
+2. The program to run should be set to `Run an application` -> `org.eclipse.ui.ide.workbench`.
+3. The location of the configuration area should be set to `${workspace_loc}/../conf_area_runtime_eclipse`.
+
+Or you can just use the provided launch config (`Runtime_Eclipse_With_Runner_Plugin.launch`).
+
+You can the import the projects located ar `eclipserunnerplugin/git/eclipserunnerplugin/testprojects/`.
+These projects contain a set of launch configurations you can use when
+working on the Eclipse Runner Plugin.
+
 History
 -------
 

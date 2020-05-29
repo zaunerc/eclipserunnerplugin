@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk13
 
 before_script:
   - cd com.eclipserunner.parent/

@@ -7,20 +7,21 @@
 
 		<!-- ECLIPSE RELEASES REPO -->
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="http://download.eclipse.org/releases/neon"/>
-			
+			<repository location="http://download.eclipse.org/releases/2020-03"/>
+
+			<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 			<!-- Required because the tycho-surefire-plugin requires native launcher artifacts. -->
 			<unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
 		</location>
 
-	    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-	      <repository location="https://dl.bintray.com/zaunerc/p2/net.nllk.mockito.p2_site/1.0.0/"/>
-	      
-	      <unit id="org.hamcrest.core" version="1.3.0.rel-v1_0_0-nllk"/> 
-	      <unit id="org.mockito.mockito-core" version="1.10.19.rel-v1_0_0-nllk"/>
-	      <unit id="org.objenesis" version="2.1.0.rel-v1_0_0-nllk"/>
-	    </location>
+            <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+              <repository location="https://dl.bintray.com/zaunerc/p2/net.nllk.mockito.p2_site/1.0.0/"/>
+              
+              <unit id="org.hamcrest.core" version="1.3.0.rel-v1_0_0-nllk"/>
+              <unit id="org.mockito.mockito-core" version="1.10.19.rel-v1_0_0-nllk"/>
+              <unit id="org.objenesis" version="2.1.0.rel-v1_0_0-nllk"/>
+            </location>
 
 	</locations>
 
