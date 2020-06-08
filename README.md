@@ -46,19 +46,15 @@ Release
 
 1. Set new version numer: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.3"`
 
-1. Update version number of the target artifact to `1.3.3` in `com.eclipserunner.parent/pom.xml`.
-
 1. Create a new commit: `$ git commit -a -m "Creating release v1.3.3."`
 
 1. Tag the commit: `$ git tag v1.3.3`
 
 1. Build project: `$ mvn clean install`
 
-1. The P2 update will be located under `$ com.eclipserunner.update_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest`.
+1. The P2 update will be located under `$ com.eclipserunner.p2_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest`.
 
 1. Start the next development iteration: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.4.qualifier"`
-
-1. Update version number of the target artifact to `1.3.4-SNAPSHOT` in `com.eclipserunner.parent/pom.xml`.
 
 1. Create a new commit: `$ git commit -a -m "Creating v1.3.4 snapshot build."`
 
@@ -136,7 +132,7 @@ History
 
 - Introduce Maven Tycho build system: Headless builds are now supported. See e.g. [Travis CI](https://travis-ci.org/zaunerc/eclipserunnerplugin).
 - Move unit tests to their own fragment: Unit tests are now run automatically as part of the build process using the Tycho Surefire Plugin.
-- P2 update site is now automatically generated: See `com.eclipserunner.update_site` project.
+- P2 update site is now automatically generated (see `com.eclipserunner.p2_site` project).
 
 ### 2014-09-13 Version 1.3.2 minor bug fixes
 
