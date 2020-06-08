@@ -6,7 +6,7 @@
 
 	<groupId>com.eclipserunner</groupId>
 	<artifactId>com.eclipserunner.parent</artifactId>
-	<version>1.3.5-SNAPSHOT</version>
+	<version>1.3.5</version>
 
 	<packaging>pom</packaging>
 
@@ -44,7 +44,7 @@
 							<!-- This plugin expects exactly one file (<artifactId>.target) in 
 								the project's base directory. -->
 							<artifactId>com.eclipserunner.target_platform</artifactId>
-							<version>1.3.5-SNAPSHOT</version>
+							<version>1.3.5</version>
 						</artifact>
 					</target>
 				</configuration>
