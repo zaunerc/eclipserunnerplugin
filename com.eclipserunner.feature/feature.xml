@@ -20,7 +20,7 @@ clicking on the icon of the launch configuration.
   https://marketplace.eclipse.org/content/eclipse-runner
 
 - Eclipse Runner P2 update site (always serving latest version):
-  https://dl.bintray.com/zaunerc/p2/eclipserunner/latest
+  https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest
    </description>
 
    <license url="http://opensource.org/licenses/mit-license.php">
@@ -49,7 +49,7 @@ SOFTWARE.
    </license>
 
    <url>
-      <update url="https://dl.bintray.com/zaunerc/p2/eclipserunner/latest/"/>
+      <update url="https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest"/>
    </url>
 
    <plugin
