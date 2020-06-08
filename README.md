@@ -124,6 +124,11 @@ working on the Eclipse Runner Plugin.
 History
 -------
 
+### 2020-06-08 Version 1.3.5 various changes
+
+- Update target platform.
+- Fix launch action not usable for configuration without run mode (see #2).
+
 ### 2016-06-23 Version 1.3.4 build system improvements
 
 - Fix automatic builds on [Travis CI](https://travis-ci.org/zaunerc/eclipserunnerplugin).
