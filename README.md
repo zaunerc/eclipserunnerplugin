@@ -1,12 +1,14 @@
-Eclipse Runner Plugin [![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin) [![Download](https://api.bintray.com/packages/zaunerc/p2/com.eclipserunner.p2_site/images/download.svg) ](https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest/)
+Eclipse Runner Plugin
 ===================
 
+[![Build Status](https://travis-ci.org/zaunerc/eclipserunnerplugin.svg?branch=master)](https://travis-ci.org/zaunerc/eclipserunnerplugin)
 [![Join the chat at https://gitter.im/eclipserunnerplugin/Lobby](https://badges.gitter.im/eclipserunnerplugin/Lobby.svg)](https://gitter.im/eclipserunnerplugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 Installation
 -------
 
-To install this plugin in Eclipse use [this update site](https://dl.bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest/).
+To install this plugin in Eclipse use [this update site](https://erp.nllk.net/p2/com.eclipserunner.p2_site/latest/).
 On the Eclipse marketplace this plugin can be found [here](https://marketplace.eclipse.org/content/eclipse-runner).
 
 Overview
@@ -52,7 +54,7 @@ Release
 
 1. Build project: `$ mvn clean install`
 
-1. The P2 update will be located under `$ com.eclipserunner.p2_site/target/repository`. Upload the contents of this directory to e.g. `https://bintray.com/zaunerc/p2/com.eclipserunner.p2_site/latest`.
+1. The P2 update will be located under `$ com.eclipserunner.p2_site/target/repository`. Upload the contents of this directory to e.g. `https://erp.nllk.net/p2/com.eclipserunner.p2_site/latest/`.
 
 1. Start the next development iteration: `$ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion="1.3.4.qualifier"`
 
@@ -117,12 +119,17 @@ In order to do so right-click on the `com.eclipserunner.plugin` project ->
 
 Or you can just use the provided launch config (`Runtime_Eclipse_With_Runner_Plugin.launch`).
 
-You can the import the projects located ar `eclipserunnerplugin/git/eclipserunnerplugin/testprojects/`.
+You can the import the projects located at `eclipserunnerplugin/git/eclipserunnerplugin/testprojects/`.
 These projects contain a set of launch configurations you can use when
 working on the Eclipse Runner Plugin.
 
 History
 -------
+
+### 2021-05-11 Version 1.3.6 various changes
+
+- Update target platform to latest Eclipse release.
+- Do not use custom bundles for hamcrest / mockito anymore (see #4).
 
 ### 2020-06-08 Version 1.3.5 various changes
 
