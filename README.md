@@ -69,7 +69,13 @@ IDE setup
 
 1. Make sure that at least [Maven](https://maven.apache.org/) version 3.6.3 is installed.
 
-2. Make sure that at least [JDK](https://openjdk.java.net/) version 13 ist installed.
+2. Make sure that at least [JDK](https://openjdk.java.net/) version 11 is installed.
+   Also keep in mind that support for Java versions which are EOL might have been removed from Maven Tycho.
+   Version 1.7.0 of Maven Tycho [removed support for Java 13](https://wiki.eclipse.org/Tycho/Release_Notes/1.7.0) for instance.
+   See [here](https://github.com/eclipse/tycho/blob/4242a0bb241b0e9e3f2384133f8adc974f0adc04/tycho-core/src/main/java/org/eclipse/tycho/core/ee/ExecutionEnvironmentUtils.java#L96),
+   [here](https://github.com/eclipse/tycho/blob/4242a0bb241b0e9e3f2384133f8adc974f0adc04/tycho-core/src/main/java/org/eclipse/tycho/core/ee/ExecutionEnvironmentUtils.java#L48) and
+   [here](https://github.com/eclipse/rt.equinox.framework/blob/a1b0ac2cf7034e29511cc2092e1f44e9b1137e9a/bundles/org.eclipse.osgi/profile.list#L14)
+   for more informations about this in the source code.
 
 3. Create the following folder layout:
 
